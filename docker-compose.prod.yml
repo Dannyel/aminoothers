@@ -1,0 +1,155 @@
+# Producción en un VPS (D17): PostgreSQL, API, frontend (BFF), Caddy con
+# HTTPS y respaldos diarios. Uso (ver docs/despliegue.md):
+#   cp .env.production.example .env.production   # completar secretos
+#   docker compose -f docker-compose.prod.yml --env-file .env.production up -d --build
+# Solo Caddy publica puertos (80/443); la API y la base no son accesibles desde fuera.
+
+x-backend-env: &backend-env
+  NODE_ENV: production
+  DATABASE_URL: postgresql://farmacia:${POSTGRES_PASSWORD:?}@postgres:5432/farmacia
+  FRONTEND_URL: https://${DOMAIN:?}
+  CORS_ORIGINS: https://${DOMAIN}
+  # El BFF llega desde la red de Docker (rangos privados) con la IP real del
+  # cliente en X-Forwarded-For.
+  TRUST_PROXY: uniquelocal
+  SWAGGER_ENABLED: 'false'
+  JWT_ACCESS_SECRET: ${JWT_ACCESS_SECRET:?}
+  TOTP_ENCRYPTION_KEY: ${TOTP_ENCRYPTION_KEY:?}
+  MFA_ISSUER: ${MFA_ISSUER:-Farmacia en línea}
+  UPLOAD_DIR: /data/uploads
+  MAIL_TRANSPORT: smtp
+  MAIL_FROM: ${MAIL_FROM:?}
+  SMTP_HOST: ${SMTP_HOST:?}
+  SMTP_PORT: ${SMTP_PORT:-587}
+  SMTP_SECURE: ${SMTP_SECURE:-false}
+  SMTP_USER: ${SMTP_USER:-}
+  SMTP_PASSWORD: ${SMTP_PASSWORD:-}
+
+services:
+  postgres:
+    image: postgres:18
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: farmacia
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?}
+      POSTGRES_DB: farmacia
+      POSTGRES_INITDB_ARGS: --encoding=UTF8 --locale=C.UTF-8
+    volumes:
+      - postgres-data:/var/lib/postgresql
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U farmacia -d farmacia']
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    networks: [internal]
+
+  # Aplica las migraciones y sincroniza permisos y roles (seed idempotente)
+  # antes de arrancar la API. Usa la etapa de compilación, que trae el CLI de Prisma.
+  migrate:
+    build:
+      context: ./backend
+      target: build
+    command: ['sh', '-c', 'pnpm exec prisma migrate deploy && node dist/database/seed.js']
+    environment:
+      DATABASE_URL: postgresql://farmacia:${POSTGRES_PASSWORD}@postgres:5432/farmacia
+      INITIAL_ADMIN_EMAIL: ${INITIAL_ADMIN_EMAIL:-}
+      INITIAL_ADMIN_PASSWORD: ${INITIAL_ADMIN_PASSWORD:-}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks: [internal]
+    restart: 'no'
+
+  backend:
+    build:
+      context: ./backend
+      target: runtime
+    restart: unless-stopped
+    environment: *backend-env
+    volumes:
+      - uploads:/data/uploads
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+    # «egress» solo da salida a Internet (servidor SMTP); no publica puertos.
+    networks: [internal, egress]
+
+  frontend:
+    build:
+      context: ./frontend
+      target: runtime
+    restart: unless-stopped
+    environment:
+      API_URL: http://backend:3000
+      ORIGIN: https://${DOMAIN}
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks: [internal, public]
+
+  caddy:
+    image: caddy:2.10
+    restart: unless-stopped
+    ports:
+      - '80:80'
+      - '443:443'
+      - '443:443/udp'
+    environment:
+      DOMAIN: ${DOMAIN}
+      ACME_EMAIL: ${ACME_EMAIL:?}
+    volumes:
+      - ./docker/caddy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+      - caddy-config:/config
+    depends_on:
+      frontend:
+        condition: service_healthy
+    networks: [public]
+
+  # Respaldo diario de la base y de los archivos (ver docs/operacion.md).
+  backup:
+    image: postgres:18
+    restart: unless-stopped
+    entrypoint: ['/scripts/backup.sh']
+    environment:
+      DATABASE_URL: postgresql://farmacia:${POSTGRES_PASSWORD}@postgres:5432/farmacia
+      BACKUP_HOUR: ${BACKUP_HOUR:-2}
+      BACKUP_KEEP_DAILY: ${BACKUP_KEEP_DAILY:-14}
+      BACKUP_KEEP_MONTHLY: ${BACKUP_KEEP_MONTHLY:-12}
+    volumes:
+      - ./docker/backup:/scripts:ro
+      - uploads:/data/uploads:ro
+      - ${BACKUP_PATH:-./backups}:/backups
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks: [internal]
+
+  # Solo bajo demanda (ver docs/operacion.md):
+  #   docker compose ... --profile restore run --rm restore /backups/daily/<carpeta>
+  restore:
+    image: postgres:18
+    profiles: [restore]
+    entrypoint: ['/scripts/restore.sh']
+    environment:
+      DATABASE_URL: postgresql://farmacia:${POSTGRES_PASSWORD}@postgres:5432/farmacia
+    volumes:
+      - ./docker/backup:/scripts:ro
+      - uploads:/data/uploads
+      - ${BACKUP_PATH:-./backups}:/backups:ro
+    networks: [internal]
+
+volumes:
+  postgres-data:
+  uploads:
+  caddy-data:
+  caddy-config:
+
+networks:
+  # Sin salida a Internet: base, migraciones, API y respaldos.
+  internal:
+    internal: true
+  # Salida a Internet para la API (correo).
+  egress:
+  # Caddy ↔ frontend.
+  public:
