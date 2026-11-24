@@ -3,22 +3,35 @@
 	import type { HTMLButtonAttributes } from 'svelte/elements';
 
 	type Variant = 'primary' | 'secondary' | 'danger' | 'ghost';
+	type Size = 'sm' | 'md' | 'lg';
 
 	let {
 		variant = 'primary',
+		size = 'md',
 		loading = false,
 		disabled,
 		children,
 		class: className = '',
 		...rest
-	}: HTMLButtonAttributes & { variant?: Variant; loading?: boolean; children: Snippet } = $props();
+	}: HTMLButtonAttributes & {
+		variant?: Variant;
+		size?: Size;
+		loading?: boolean;
+		children: Snippet;
+	} = $props();
 
 	const variants: Record<Variant, string> = {
-		primary: 'bg-teal-700 text-white hover:bg-teal-800 focus-visible:outline-teal-700',
+		primary: 'bg-stone-900 text-white hover:bg-stone-700 active:bg-stone-950',
 		secondary:
-			'border border-slate-300 bg-white text-slate-800 hover:bg-slate-50 focus-visible:outline-slate-400',
-		danger: 'bg-red-600 text-white hover:bg-red-700 focus-visible:outline-red-600',
-		ghost: 'text-slate-700 hover:bg-slate-100 focus-visible:outline-slate-400'
+			'border border-stone-300 bg-white text-stone-900 hover:border-stone-900 active:bg-stone-100',
+		danger: 'bg-red-700 text-white hover:bg-red-800 active:bg-red-900',
+		ghost: 'text-stone-700 hover:bg-stone-100 hover:text-stone-950 active:bg-stone-200'
+	};
+	// md y lg cumplen el área táctil mínima de 44 px de alto en pantallas táctiles.
+	const sizes: Record<Size, string> = {
+		sm: 'min-h-9 px-4 text-sm',
+		md: 'min-h-10 px-5 text-sm pointer-coarse:min-h-11',
+		lg: 'min-h-12 px-7 text-[0.9375rem]'
 	};
 </script>
 
@@ -26,9 +39,9 @@
 	{...rest}
 	disabled={disabled || loading}
 	aria-busy={loading}
-	class="inline-flex items-center justify-center gap-2 rounded-md px-4 py-2 text-sm font-medium transition focus-visible:outline-2 focus-visible:outline-offset-2 disabled:cursor-not-allowed disabled:opacity-60 {variants[
+	class="inline-flex items-center justify-center gap-2 rounded-full font-medium transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 disabled:cursor-not-allowed disabled:opacity-60 {variants[
 		variant
-	]} {className}"
+	]} {sizes[size]} {className}"
 >
 	{#if loading}
 		<span

@@ -11,22 +11,22 @@
 
 <form method="get" class="mb-4 flex flex-wrap items-end gap-3" role="search">
 	<label class="flex min-w-60 flex-1 flex-col gap-1 text-sm">
-		<span class="font-medium text-slate-700">Buscar</span>
+		<span class="font-medium text-stone-700">Buscar</span>
 		<input
 			type="search"
 			name="search"
 			value={search}
 			{placeholder}
 			maxlength={100}
-			class="rounded-md border-slate-300 text-sm shadow-sm focus:border-teal-600 focus:ring-teal-600"
+			class="rounded-lg border-stone-300 text-sm shadow-sm focus:border-brand-600 focus:ring-brand-600"
 		/>
 	</label>
 	<label class="flex flex-col gap-1 text-sm">
-		<span class="font-medium text-slate-700">Estado</span>
+		<span class="font-medium text-stone-700">Estado</span>
 		<select
 			name="status"
 			value={status}
-			class="rounded-md border-slate-300 text-sm shadow-sm focus:border-teal-600 focus:ring-teal-600"
+			class="rounded-lg border-stone-300 text-sm shadow-sm focus:border-brand-600 focus:ring-brand-600"
 		>
 			<option value="">Todos</option>
 			{#each Object.entries(USER_STATUS_LABELS) as [value, label] (value)}
@@ -35,7 +35,7 @@
 		</select>
 	</label>
 	<button
-		class="rounded-md border border-slate-300 bg-white px-4 py-2 text-sm font-medium hover:bg-slate-50"
+		class="rounded-lg border border-stone-300 bg-white px-4 py-2 text-sm font-medium hover:bg-stone-50"
 		>Filtrar</button
 	>
 </form>

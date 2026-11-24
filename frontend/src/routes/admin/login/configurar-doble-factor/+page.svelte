@@ -8,7 +8,7 @@
 </script>
 
 <AdminAuthCard title="Configure el doble factor">
-	<p class="mb-4 text-sm text-slate-600">
+	<p class="mb-4 text-sm text-stone-600">
 		El acceso al panel exige una app autenticadora además de la contraseña.
 	</p>
 	<MfaEnrollment enrollment={data.enrollment} {form} loginHref={resolve('admin/login')} />

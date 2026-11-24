@@ -24,12 +24,12 @@
 
 <form method="get" class="mb-4 flex items-end gap-2">
 	<label class="flex flex-col gap-1 text-sm">
-		<span class="font-medium text-slate-700">Estado</span>
+		<span class="font-medium text-stone-700">Estado</span>
 		<select
 			name="status"
 			value={data.status}
 			onchange={(e) => e.currentTarget.form?.requestSubmit()}
-			class="rounded-md border-slate-300 text-sm shadow-sm focus:border-teal-600 focus:ring-teal-600"
+			class="rounded-lg border-stone-300 text-sm shadow-sm focus:border-brand-600 focus:ring-brand-600"
 		>
 			{#each data.statuses as s (s)}<option value={s}
 					>{PAYMENT_STATUS_LABELS[s as PaymentStatus]}</option
@@ -37,17 +37,17 @@
 		</select>
 	</label>
 	<noscript
-		><button class="rounded-md border border-slate-300 px-3 py-2 text-sm">Filtrar</button></noscript
+		><button class="rounded-lg border border-stone-300 px-3 py-2 text-sm">Filtrar</button></noscript
 	>
 </form>
 
 {#if data.payments.items.length === 0}
 	<EmptyState title="No hay pagos en este estado" />
 {:else}
-	<div class="overflow-x-auto rounded-lg border border-slate-200 bg-white">
-		<table class="min-w-full divide-y divide-slate-200 text-sm">
+	<div class="card overflow-x-auto">
+		<table class="min-w-full divide-y divide-stone-200 text-sm">
 			<thead
-				class="bg-slate-50 text-left text-xs font-medium tracking-wide text-slate-500 uppercase"
+				class="bg-stone-50 text-left text-xs font-medium tracking-wide text-stone-500 uppercase"
 			>
 				<tr>
 					<th class="px-4 py-3">Pedido</th>
@@ -57,13 +57,13 @@
 					<th class="px-4 py-3 text-right">Monto</th>
 				</tr>
 			</thead>
-			<tbody class="divide-y divide-slate-100">
+			<tbody class="divide-y divide-stone-100">
 				{#each data.payments.items as p (p.id)}
 					<tr>
 						<td class="px-4 py-3">
 							<a
 								href={resolve(`admin/pedidos/${p.order.id}`)}
-								class="font-medium text-teal-800 hover:underline"
+								class="font-medium text-brand-800 hover:underline"
 								>{formatOrderNumber('PED', p.order.number)}</a
 							>
 						</td>
@@ -72,7 +72,7 @@
 						<td class="px-4 py-3">
 							{#if p.bankAccount}
 								{p.bankAccount.bankName} · ref. {p.bankReference} · {formatDate(p.transferDate)}
-								<p class="text-xs text-slate-500">Enviado {formatDateTime(p.submittedAt)}</p>
+								<p class="text-xs text-stone-500">Enviado {formatDateTime(p.submittedAt)}</p>
 							{:else}—{/if}
 						</td>
 						<td class="px-4 py-3 text-right font-semibold">{formatMoney(p.amount)}</td>

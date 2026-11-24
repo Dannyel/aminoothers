@@ -37,7 +37,7 @@
 		<form
 			method="post"
 			action="?/create"
-			class="flex flex-wrap items-end gap-3 rounded-lg border border-slate-200 bg-white p-4"
+			class="card flex flex-wrap items-end gap-3 p-4"
 			use:enhance
 		>
 			<div class="min-w-60 flex-1">
@@ -49,21 +49,21 @@
 
 	<form method="get" class="flex flex-wrap items-end gap-3" role="search">
 		<label class="flex min-w-60 flex-1 flex-col gap-1 text-sm">
-			<span class="font-medium text-slate-700">Buscar</span>
+			<span class="font-medium text-stone-700">Buscar</span>
 			<input
 				type="search"
 				name="search"
 				value={data.search}
 				maxlength={100}
-				class="rounded-md border-slate-300 text-sm shadow-sm focus:border-teal-600 focus:ring-teal-600"
+				class="rounded-lg border-stone-300 text-sm shadow-sm focus:border-brand-600 focus:ring-brand-600"
 			/>
 		</label>
 		<label class="flex flex-col gap-1 text-sm">
-			<span class="font-medium text-slate-700">Estado</span>
+			<span class="font-medium text-stone-700">Estado</span>
 			<select
 				name="status"
 				value={data.status}
-				class="rounded-md border-slate-300 text-sm shadow-sm focus:border-teal-600 focus:ring-teal-600"
+				class="rounded-lg border-stone-300 text-sm shadow-sm focus:border-brand-600 focus:ring-brand-600"
 			>
 				<option value="active">Activos</option>
 				<option value="inactive">Inactivos</option>
@@ -71,7 +71,7 @@
 			</select>
 		</label>
 		<button
-			class="rounded-md border border-slate-300 bg-white px-4 py-2 text-sm font-medium hover:bg-slate-50"
+			class="rounded-lg border border-stone-300 bg-white px-4 py-2 text-sm font-medium hover:bg-stone-50"
 			>Filtrar</button
 		>
 	</form>
@@ -79,7 +79,7 @@
 	{#if data.result.items.length === 0}
 		<EmptyState title="No hay elementos que coincidan" />
 	{:else}
-		<ul class="divide-y divide-slate-100 rounded-lg border border-slate-200 bg-white">
+		<ul class="card divide-y divide-stone-100">
 			{#each data.result.items as item (item.id)}
 				<li class="flex flex-wrap items-center gap-3 px-4 py-3">
 					{#if editingId === item.id}
@@ -96,7 +96,7 @@
 								required
 								maxlength={150}
 								aria-label="Nombre"
-								class="min-w-60 flex-1 rounded-md border-slate-300 text-sm shadow-sm focus:border-teal-600 focus:ring-teal-600"
+								class="min-w-60 flex-1 rounded-lg border-stone-300 text-sm shadow-sm focus:border-brand-600 focus:ring-brand-600"
 							/>
 							<Button type="submit">Guardar</Button>
 							<Button type="button" variant="ghost" onclick={() => (editingId = null)}
@@ -105,11 +105,11 @@
 						</form>
 					{:else}
 						<div class="min-w-0 flex-1">
-							<p class="font-medium text-slate-900">
+							<p class="font-medium text-stone-900">
 								{item.name}
 								{#if !item.isActive}<Badge>Inactivo</Badge>{/if}
 							</p>
-							<p class="text-xs text-slate-500">{item.productCount} producto(s)</p>
+							<p class="text-xs text-stone-500">{item.productCount} producto(s)</p>
 						</div>
 						{#if canManage}
 							<Button type="button" variant="ghost" onclick={() => (editingId = item.id)}

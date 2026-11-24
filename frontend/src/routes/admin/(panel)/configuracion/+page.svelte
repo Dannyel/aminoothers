@@ -12,7 +12,7 @@
 		() =>
 		async ({ update }: { update: (o: { reset: boolean }) => Promise<void> }) =>
 			update({ reset: false });
-	const box = 'grid gap-4 rounded-lg border border-slate-200 bg-white p-6 sm:grid-cols-2';
+	const box = 'grid gap-4 card p-6 sm:grid-cols-2';
 </script>
 
 <PageHeading
@@ -24,12 +24,12 @@
 	<Alert variant="success" messages={form && 'success' in form ? form.success : undefined} />
 	<Alert variant="error" messages={form && 'messages' in form ? form.messages : undefined} />
 
-	<section class="flex flex-col gap-3 rounded-lg border border-slate-200 bg-white p-6">
-		<h2 class="font-semibold text-slate-900">Logotipo</h2>
+	<section class="card flex flex-col gap-3 p-6">
+		<h2 class="font-semibold text-stone-900">Logotipo</h2>
 		{#if s.logoFileId}
 			<img src="/media/{s.logoFileId}" alt="Logotipo actual" class="h-16 w-auto self-start" />
 		{:else}
-			<p class="text-sm text-slate-500">Sin logotipo: la tienda muestra el nombre comercial.</p>
+			<p class="text-sm text-stone-500">Sin logotipo: la tienda muestra el nombre comercial.</p>
 		{/if}
 		<div class="flex flex-wrap items-end gap-3">
 			<form
@@ -58,7 +58,7 @@
 
 	<form method="post" action="?/update" class="flex flex-col gap-6" use:enhance={keep}>
 		<section class={box}>
-			<h2 class="font-semibold text-slate-900 sm:col-span-2">Datos de la farmacia</h2>
+			<h2 class="font-semibold text-stone-900 sm:col-span-2">Datos de la farmacia</h2>
 			<TextField
 				label="Nombre comercial"
 				name="tradeName"
@@ -98,8 +98,8 @@
 		</section>
 
 		<section class={box}>
-			<h2 class="font-semibold text-slate-900 sm:col-span-2">Información regulatoria</h2>
-			<p class="text-sm text-slate-600 sm:col-span-2">
+			<h2 class="font-semibold text-stone-900 sm:col-span-2">Información regulatoria</h2>
+			<p class="text-sm text-stone-600 sm:col-span-2">
 				El texto exacto debe validarlo el regente farmacéutico con las disposiciones vigentes.
 			</p>
 			<TextField
@@ -115,7 +115,7 @@
 				value={s.regentName ?? ''}
 			/>
 			<label class="flex flex-col gap-1 text-sm sm:col-span-2">
-				<span class="font-medium text-slate-700"
+				<span class="font-medium text-stone-700"
 					>Leyenda en toda la tienda <span class="text-red-600" aria-hidden="true">*</span></span
 				>
 				<textarea
@@ -123,14 +123,14 @@
 					required
 					rows="3"
 					maxlength={2000}
-					class="rounded-md border-slate-300 text-sm shadow-sm focus:border-teal-600 focus:ring-teal-600"
+					class="rounded-lg border-stone-300 text-sm shadow-sm focus:border-brand-600 focus:ring-brand-600"
 					>{s.regulatoryNotice}</textarea
 				>
 			</label>
 		</section>
 
 		<section class={box}>
-			<h2 class="font-semibold text-slate-900 sm:col-span-2">Pedidos</h2>
+			<h2 class="font-semibold text-stone-900 sm:col-span-2">Pedidos</h2>
 			<TextField
 				label="Plazo para pagar por transferencia (horas)"
 				name="transferReservationHours"
@@ -170,7 +170,7 @@
 			/>
 		</section>
 
-		<section class="flex flex-col gap-4 rounded-lg border border-slate-200 bg-white p-5">
+		<section class="card flex flex-col gap-4 p-5">
 			<h2 class="text-base font-semibold">Notificaciones</h2>
 			<TextField
 				label="Correo de alertas del personal"

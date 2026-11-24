@@ -22,7 +22,7 @@
 	const canManage = $derived(can(data.staff, 'returns.manage'));
 	const canInspect = $derived(can(data.staff, 'returns.inspect'));
 	const field =
-		'rounded-md border-slate-300 text-sm shadow-sm focus:border-teal-600 focus:ring-teal-600';
+		'rounded-lg border-stone-300 text-sm shadow-sm focus:border-brand-600 focus:ring-brand-600';
 </script>
 
 <PageHeading
@@ -32,11 +32,11 @@
 	{#snippet actions()}
 		<a
 			href={resolve(`admin/pedidos/${ret.orderId}`)}
-			class="rounded-md px-3 py-2 text-sm text-slate-700 hover:bg-slate-200">Ver pedido</a
+			class="rounded-lg px-3 py-2 text-sm text-stone-700 hover:bg-stone-200">Ver pedido</a
 		>
 		<a
 			href={resolve('admin/devoluciones')}
-			class="rounded-md px-3 py-2 text-sm text-slate-700 hover:bg-slate-200">← Devoluciones</a
+			class="rounded-lg px-3 py-2 text-sm text-stone-700 hover:bg-stone-200">← Devoluciones</a
 		>
 	{/snippet}
 </PageHeading>
@@ -45,14 +45,14 @@
 	<Alert variant="success" messages={form && 'success' in form ? form.success : undefined} />
 	<Alert variant="error" messages={form && 'messages' in form ? form.messages : undefined} />
 
-	<section class="flex flex-col gap-2 rounded-lg border border-slate-200 bg-white p-5">
+	<section class="card flex flex-col gap-2 p-5">
 		<div class="flex flex-wrap items-center gap-2">
 			<Badge tone={RETURN_STATUS_TONES[ret.status]}>{RETURN_STATUS_LABELS[ret.status]}</Badge>
 			<span>{ret.reason} · {formatMoney(ret.amount)}</span>
 		</div>
-		{#if ret.notes}<p class="text-slate-600">{ret.notes}</p>{/if}
+		{#if ret.notes}<p class="text-stone-600">{ret.notes}</p>{/if}
 		{#if ret.rejectedReason}<p class="text-red-700">Rechazada: {ret.rejectedReason}</p>{/if}
-		<p class="text-xs text-slate-500">
+		<p class="text-xs text-stone-500">
 			Registrada {formatDateTime(ret.createdAt)}{ret.createdBy
 				? ` por ${ret.createdBy.name}`
 				: ''}{ret.receivedAt ? ` · recibida ${formatDateTime(ret.receivedAt)}` : ''}{ret.closedAt
@@ -83,13 +83,13 @@
 		{/if}
 	</section>
 
-	<section class="flex flex-col gap-3 rounded-lg border border-slate-200 bg-white p-5">
-		<h2 class="font-semibold text-slate-900">Unidades</h2>
+	<section class="card flex flex-col gap-3 p-5">
+		<h2 class="font-semibold text-stone-900">Unidades</h2>
 		{#each ret.items as item (item.id)}
-			<div class="flex flex-col gap-2 rounded-md border border-slate-200 p-3">
+			<div class="flex flex-col gap-2 rounded-lg border border-stone-200 p-3">
 				<p>
 					<span class="font-medium">{item.quantity} × {item.productName}</span>
-					<span class="text-slate-500"
+					<span class="text-stone-500"
 						>· {item.sku} · lote {item.lotNumber} · {formatMoney(item.amount)}</span
 					>
 				</p>
@@ -117,15 +117,15 @@
 				{/if}
 			</div>
 		{/each}
-		<p class="text-xs text-slate-500">
+		<p class="text-xs text-stone-500">
 			Solo se reincorpora si el lote sigue disponible y vigente; en otro caso, destruya o devuelva
 			al proveedor.
 		</p>
 	</section>
 
 	{#if ret.refunds.length > 0}
-		<section class="rounded-lg border border-slate-200 bg-white p-5">
-			<h2 class="mb-2 font-semibold text-slate-900">Reembolsos</h2>
+		<section class="card p-5">
+			<h2 class="mb-2 font-semibold text-stone-900">Reembolsos</h2>
 			<ul>
 				{#each ret.refunds as r (r.id)}
 					<li>

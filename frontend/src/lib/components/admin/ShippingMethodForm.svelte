@@ -20,7 +20,7 @@
 <form
 	method="post"
 	{action}
-	class="grid gap-4 rounded-lg border border-slate-200 bg-white p-6 sm:grid-cols-2"
+	class="card grid gap-4 p-6 sm:grid-cols-2"
 	use:enhance={() =>
 		async ({ update }) =>
 			update({ reset: !method?.id })}
@@ -69,11 +69,11 @@
 		/>
 	</div>
 	<label class="flex flex-col gap-1 text-sm">
-		<span class="font-medium text-slate-700">Mensajería habitual</span>
+		<span class="font-medium text-stone-700">Mensajería habitual</span>
 		<select
 			name="courierId"
 			value={method?.courierId ?? ''}
-			class="rounded-md border-slate-300 text-sm shadow-sm focus:border-teal-600 focus:ring-teal-600"
+			class="rounded-lg border-stone-300 text-sm shadow-sm focus:border-brand-600 focus:ring-brand-600"
 		>
 			<option value="">Sin asignar</option>
 			{#each couriers as c (c.id)}<option value={c.id}>{c.name}</option>{/each}
@@ -87,13 +87,13 @@
 		max={1000}
 		value={method?.sortOrder ?? 0}
 	/>
-	<div class="flex flex-col justify-end gap-2 text-sm text-slate-700">
+	<div class="flex flex-col justify-end gap-2 text-sm text-stone-700">
 		<label class="flex items-center gap-2">
 			<input
 				type="checkbox"
 				name="allowsCashOnDelivery"
 				checked={method?.allowsCashOnDelivery ?? true}
-				class="rounded border-slate-300 text-teal-700 focus:ring-teal-600"
+				class="rounded border-stone-300 text-brand-700 focus:ring-brand-600"
 			/>
 			Admite pago contra entrega
 		</label>
@@ -102,7 +102,7 @@
 				type="checkbox"
 				name="isActive"
 				checked={method?.isActive ?? true}
-				class="rounded border-slate-300 text-teal-700 focus:ring-teal-600"
+				class="rounded border-stone-300 text-brand-700 focus:ring-brand-600"
 			/>
 			Disponible en la tienda
 		</label>

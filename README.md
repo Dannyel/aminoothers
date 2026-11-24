@@ -37,6 +37,7 @@ Guía completa en [docs/instalacion.md](docs/instalacion.md).
 - [Operación: respaldos, retención, monitoreo e incidentes](docs/operacion.md)
 - [Seguridad: controles y revisión](docs/seguridad.md)
 - [Manual del panel administrativo](docs/manual-panel.md)
+- [Sistema de diseño del frontend](docs/diseno.md)
 - [Decisiones técnicas](docs/decisiones/)
 - API: Swagger en `http://localhost:3000/api/docs` (JSON en `/api/docs-json`)
 

@@ -21,7 +21,7 @@
 	let submitting = $state(false);
 	const itemFor = (id: string) => order.items.find((i) => i.id === id)!;
 	const field =
-		'w-full rounded-md border-slate-300 text-sm shadow-sm focus:border-teal-600 focus:ring-teal-600';
+		'w-full rounded-lg border-stone-300 text-sm shadow-sm focus:border-brand-600 focus:ring-brand-600';
 
 	function addLot(itemId: string, after: number) {
 		const index = rows.findIndex((r) => r.key === after);
@@ -47,7 +47,7 @@
 	</div>
 	<div class="overflow-x-auto">
 		<table class="min-w-full text-sm">
-			<thead class="text-left text-xs font-medium tracking-wide text-slate-500 uppercase">
+			<thead class="text-left text-xs font-medium tracking-wide text-stone-500 uppercase">
 				<tr>
 					<th class="py-2 pr-3">Producto</th>
 					<th class="py-2 pr-3">Lote</th>
@@ -64,8 +64,8 @@
 					<tr class="align-top">
 						<td class="py-2 pr-3">
 							<input type="hidden" name="purchaseOrderItemId" value={row.itemId} />
-							<p class="font-medium text-slate-800">{item.product.name}</p>
-							<p class="text-xs text-slate-500">Pendiente: {item.quantityPending}</p>
+							<p class="font-medium text-stone-800">{item.product.name}</p>
+							<p class="text-xs text-stone-500">Pendiente: {item.quantityPending}</p>
 						</td>
 						<td class="py-2 pr-3"
 							><input
@@ -111,7 +111,7 @@
 						<td class="py-2">
 							<button
 								type="button"
-								class="text-xs whitespace-nowrap text-teal-700 hover:underline"
+								class="text-xs whitespace-nowrap text-brand-700 hover:underline"
 								onclick={() => addLot(row.itemId, row.key)}>+ otro lote</button
 							>
 						</td>
@@ -120,7 +120,7 @@
 			</tbody>
 		</table>
 	</div>
-	<p class="text-xs text-slate-500">
+	<p class="text-xs text-stone-500">
 		Deje la cantidad vacía en las líneas que no llegaron. El vencimiento es obligatorio para
 		medicamentos. Toda la recepción se registra o, si hay un error, no se registra nada.
 	</p>

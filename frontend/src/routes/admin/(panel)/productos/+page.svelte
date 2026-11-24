@@ -9,7 +9,7 @@
 
 	let { data }: PageProps = $props();
 	const selectClass =
-		'rounded-md border-slate-300 text-sm shadow-sm focus:border-teal-600 focus:ring-teal-600';
+		'rounded-lg border-stone-300 text-sm shadow-sm focus:border-brand-600 focus:ring-brand-600';
 </script>
 
 <PageHeading
@@ -20,7 +20,7 @@
 		{#if can(data.staff, 'products.manage')}
 			<a
 				href={resolve('admin/productos/nuevo')}
-				class="rounded-md bg-teal-700 px-4 py-2 text-sm font-medium text-white hover:bg-teal-800"
+				class="rounded-lg bg-brand-700 px-4 py-2 text-sm font-medium text-white hover:bg-brand-800"
 				>Nuevo producto</a
 			>
 		{/if}
@@ -29,7 +29,7 @@
 
 <form method="get" class="mb-4 grid gap-3 sm:grid-cols-3 lg:grid-cols-7 lg:items-end" role="search">
 	<label class="flex flex-col gap-1 text-sm sm:col-span-3 lg:col-span-2">
-		<span class="font-medium text-slate-700">Buscar</span>
+		<span class="font-medium text-stone-700">Buscar</span>
 		<input
 			type="search"
 			name="search"
@@ -39,21 +39,21 @@
 		/>
 	</label>
 	<label class="flex flex-col gap-1 text-sm">
-		<span class="font-medium text-slate-700">Categoría</span>
+		<span class="font-medium text-stone-700">Categoría</span>
 		<select name="categoryId" value={data.filters.categoryId} class={selectClass}>
 			<option value="">Todas</option>
 			{#each data.categories as c (c.id)}<option value={c.id}>{c.name}</option>{/each}
 		</select>
 	</label>
 	<label class="flex flex-col gap-1 text-sm">
-		<span class="font-medium text-slate-700">Marca</span>
+		<span class="font-medium text-stone-700">Marca</span>
 		<select name="brandId" value={data.filters.brandId} class={selectClass}>
 			<option value="">Todas</option>
 			{#each data.brands as b (b.id)}<option value={b.id}>{b.name}</option>{/each}
 		</select>
 	</label>
 	<label class="flex flex-col gap-1 text-sm">
-		<span class="font-medium text-slate-700">Condición</span>
+		<span class="font-medium text-stone-700">Condición</span>
 		<select name="saleCondition" value={data.filters.saleCondition} class={selectClass}>
 			<option value="">Todas</option>
 			{#each Object.entries(SALE_CONDITION_LABELS) as [value, label] (value)}
@@ -62,7 +62,7 @@
 		</select>
 	</label>
 	<label class="flex flex-col gap-1 text-sm">
-		<span class="font-medium text-slate-700">Estado</span>
+		<span class="font-medium text-stone-700">Estado</span>
 		<select name="status" value={data.filters.status} class={selectClass}>
 			<option value="all">Todos</option>
 			<option value="active">Activos</option>
@@ -71,7 +71,7 @@
 	</label>
 	<div class="flex items-end gap-2">
 		<label class="flex flex-1 flex-col gap-1 text-sm">
-			<span class="font-medium text-slate-700">En línea</span>
+			<span class="font-medium text-stone-700">En línea</span>
 			<select name="onlineSale" value={data.filters.onlineSale} class={selectClass}>
 				<option value="all">Todos</option>
 				<option value="yes">Habilitados</option>
@@ -79,7 +79,7 @@
 			</select>
 		</label>
 		<button
-			class="rounded-md border border-slate-300 bg-white px-4 py-2 text-sm font-medium hover:bg-slate-50"
+			class="rounded-lg border border-stone-300 bg-white px-4 py-2 text-sm font-medium hover:bg-stone-50"
 		>
 			Filtrar
 		</button>
@@ -89,10 +89,10 @@
 {#if data.result.items.length === 0}
 	<EmptyState title="No hay productos que coincidan" />
 {:else}
-	<div class="overflow-x-auto rounded-lg border border-slate-200 bg-white">
-		<table class="min-w-full divide-y divide-slate-200 text-sm">
+	<div class="card overflow-x-auto">
+		<table class="min-w-full divide-y divide-stone-200 text-sm">
 			<thead
-				class="bg-slate-50 text-left text-xs font-medium tracking-wide text-slate-500 uppercase"
+				class="bg-stone-50 text-left text-xs font-medium tracking-wide text-stone-500 uppercase"
 			>
 				<tr>
 					<th class="px-4 py-3">Producto</th>
@@ -101,27 +101,27 @@
 					<th class="px-4 py-3">Estado</th>
 				</tr>
 			</thead>
-			<tbody class="divide-y divide-slate-100">
+			<tbody class="divide-y divide-stone-100">
 				{#each data.result.items as product (product.id)}
-					<tr class="hover:bg-slate-50">
+					<tr class="hover:bg-stone-50">
 						<td class="px-4 py-3">
 							<div class="flex items-center gap-3">
 								{#if product.primaryImageFileId}
 									<img
 										src={resolve(`media/${product.primaryImageFileId}`)}
 										alt=""
-										class="size-10 rounded border border-slate-200 object-cover"
+										class="size-10 rounded border border-stone-200 object-cover"
 										loading="lazy"
 									/>
 								{:else}
-									<div class="size-10 rounded border border-dashed border-slate-300"></div>
+									<div class="size-10 rounded border border-dashed border-stone-300"></div>
 								{/if}
 								<div>
 									<a
 										href={resolve(`admin/productos/${product.id}`)}
-										class="font-medium text-teal-800 hover:underline">{product.name}</a
+										class="font-medium text-brand-800 hover:underline">{product.name}</a
 									>
-									<p class="text-slate-500">
+									<p class="text-stone-500">
 										{product.sku}
 										{#if product.presentation}· {product.presentation.name}{/if}
 										{#if product.concentration}· {product.concentration.name}{/if}
@@ -129,8 +129,8 @@
 								</div>
 							</div>
 						</td>
-						<td class="px-4 py-3 text-slate-700">{product.category.name}</td>
-						<td class="px-4 py-3 text-right whitespace-nowrap text-slate-900"
+						<td class="px-4 py-3 text-stone-700">{product.category.name}</td>
+						<td class="px-4 py-3 text-right whitespace-nowrap text-stone-900"
 							>{formatMoney(product.price)}</td
 						>
 						<td class="px-4 py-3">

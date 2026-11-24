@@ -42,6 +42,6 @@
 		</form>
 	{/if}
 	{#snippet footer()}
-		<a href={resolve('login')} class="text-teal-700 hover:underline">Volver a iniciar sesión</a>
+		<a href={resolve('login')} class="text-brand-700 hover:underline">Volver a iniciar sesión</a>
 	{/snippet}
 </AuthCard>

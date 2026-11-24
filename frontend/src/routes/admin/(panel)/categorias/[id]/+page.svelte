@@ -23,7 +23,7 @@
 	{#snippet actions()}
 		<a
 			href={resolve('admin/categorias')}
-			class="rounded-md px-3 py-2 text-sm text-slate-700 hover:bg-slate-200">← Volver</a
+			class="rounded-lg px-3 py-2 text-sm text-stone-700 hover:bg-stone-200">← Volver</a
 		>
 	{/snippet}
 </PageHeading>
@@ -35,7 +35,7 @@
 	<form
 		method="post"
 		action="?/update"
-		class="grid gap-4 rounded-lg border border-slate-200 bg-white p-6 sm:grid-cols-2"
+		class="card grid gap-4 p-6 sm:grid-cols-2"
 		use:enhance={keep}
 	>
 		<TextField
@@ -64,29 +64,29 @@
 				disabled={!canManage}
 			/>
 		</div>
-		<label class="flex items-center gap-2 text-sm text-slate-700">
+		<label class="flex items-center gap-2 text-sm text-stone-700">
 			<input
 				type="checkbox"
 				name="isActive"
 				checked={category.isActive}
 				disabled={!canManage}
-				class="rounded border-slate-300 text-teal-700 focus:ring-teal-600"
+				class="rounded border-stone-300 text-brand-700 focus:ring-brand-600"
 			/>
 			Activa
 		</label>
 		{#if canManage}<div class="sm:col-span-2"><Button type="submit">Guardar</Button></div>{/if}
 	</form>
 
-	<section class="flex flex-col gap-4 rounded-lg border border-slate-200 bg-white p-6">
-		<h2 class="font-medium text-slate-900">Imagen</h2>
+	<section class="card flex flex-col gap-4 p-6">
+		<h2 class="font-medium text-stone-900">Imagen</h2>
 		{#if category.imageFileId}
 			<img
 				src={resolve(`media/${category.imageFileId}`)}
 				alt={category.name}
-				class="h-32 w-32 rounded-md border border-slate-200 object-cover"
+				class="h-32 w-32 rounded-lg border border-stone-200 object-cover"
 			/>
 		{:else}
-			<p class="text-sm text-slate-500">Sin imagen.</p>
+			<p class="text-sm text-stone-500">Sin imagen.</p>
 		{/if}
 		{#if canManage}
 			<form
@@ -113,8 +113,8 @@
 		{/if}
 	</section>
 
-	<section class="flex flex-col gap-4 rounded-lg border border-slate-200 bg-white p-6">
-		<h2 class="font-medium text-slate-900">Subcategorías</h2>
+	<section class="card flex flex-col gap-4 p-6">
+		<h2 class="font-medium text-stone-900">Subcategorías</h2>
 		{#if canManage}
 			<form method="post" action="?/createSub" class="flex flex-wrap items-end gap-3" use:enhance>
 				<div class="min-w-60 flex-1">
@@ -124,15 +124,15 @@
 			</form>
 		{/if}
 		{#if category.subcategories.length === 0}
-			<p class="text-sm text-slate-500">Sin subcategorías.</p>
+			<p class="text-sm text-stone-500">Sin subcategorías.</p>
 		{:else}
-			<ul class="divide-y divide-slate-100">
+			<ul class="divide-y divide-stone-100">
 				{#each category.subcategories as sub (sub.id)}
 					<li class="flex flex-wrap items-center gap-3 py-2">
-						<span class="flex-1 text-sm text-slate-800">
+						<span class="flex-1 text-sm text-stone-800">
 							{sub.name}
 							{#if !sub.isActive}<Badge>Inactiva</Badge>{/if}
-							<span class="text-xs text-slate-500">· {sub.productCount} producto(s)</span>
+							<span class="text-xs text-stone-500">· {sub.productCount} producto(s)</span>
 						</span>
 						{#if canManage}
 							<form method="post" action="?/updateSub" use:enhance>

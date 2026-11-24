@@ -19,7 +19,7 @@
 
 	{#if !profile.emailVerified}
 		<div
-			class="flex flex-wrap items-center justify-between gap-3 rounded-md border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900"
+			class="flex flex-wrap items-center justify-between gap-3 rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900"
 		>
 			<p>Confirme su correo electrónico para poder realizar compras.</p>
 			<form method="post" action="?/resendVerification" use:enhance>
@@ -31,7 +31,7 @@
 	<form
 		method="post"
 		action="?/update"
-		class="flex flex-col gap-4 rounded-lg border border-slate-200 bg-white p-6"
+		class="card flex flex-col gap-4 p-6"
 		use:enhance={() => {
 			submitting = true;
 			return async ({ update }) => {
@@ -63,8 +63,8 @@
 				value={profile.birthDate ?? ''}
 			/>
 		</div>
-		<fieldset class="grid gap-4 border-t border-slate-200 pt-4 sm:grid-cols-2">
-			<legend class="mb-2 text-sm font-medium text-slate-800">Datos de facturación</legend>
+		<fieldset class="grid gap-4 border-t border-stone-200 pt-4 sm:grid-cols-2">
+			<legend class="mb-2 text-sm font-medium text-stone-800">Datos de facturación</legend>
 			<TextField
 				label="NIT"
 				name="taxId"

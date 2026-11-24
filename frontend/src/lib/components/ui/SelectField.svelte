@@ -17,8 +17,8 @@
 	} = $props();
 </script>
 
-<div class="flex flex-col gap-1">
-	<label for={id} class="text-sm font-medium text-slate-700">
+<div class="flex flex-col gap-1.5">
+	<label for={id} class="text-sm font-semibold text-stone-700">
 		{label}
 		{#if rest.required}<span class="text-red-600" aria-hidden="true">*</span>{/if}
 	</label>
@@ -26,7 +26,7 @@
 		{id}
 		{name}
 		bind:value
-		class="rounded-md border-slate-300 text-sm shadow-sm focus:border-teal-600 focus:ring-teal-600"
+		class="rounded-lg border-stone-300 text-sm shadow-sm focus:border-brand-600 focus:ring-brand-600"
 		{...rest}
 	>
 		{#if placeholder}<option value="">{placeholder}</option>{/if}

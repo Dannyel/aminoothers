@@ -20,7 +20,7 @@
 <form
 	method="post"
 	{action}
-	class="grid gap-4 rounded-lg border border-slate-200 bg-white p-6 sm:grid-cols-2"
+	class="card grid gap-4 p-6 sm:grid-cols-2"
 	use:enhance={() =>
 		async ({ update }) =>
 			update({ reset: false })}
@@ -51,12 +51,12 @@
 			<TextField label="Notas" name="notes" maxlength={1000} value={supplier?.notes ?? ''} />
 		</div>
 		{#if supplier?.id}
-			<label class="flex items-center gap-2 text-sm text-slate-700">
+			<label class="flex items-center gap-2 text-sm text-stone-700">
 				<input
 					type="checkbox"
 					name="isActive"
 					checked={supplier.isActive}
-					class="rounded border-slate-300 text-teal-700 focus:ring-teal-600"
+					class="rounded border-stone-300 text-brand-700 focus:ring-brand-600"
 				/>
 				Activo
 			</label>

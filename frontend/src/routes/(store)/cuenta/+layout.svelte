@@ -13,18 +13,23 @@
 	] as const;
 </script>
 
-<div class="mx-auto grid max-w-6xl gap-6 px-4 py-8 md:grid-cols-[200px_1fr]">
+<div
+	class="mx-auto grid max-w-7xl gap-8 px-4 py-10 sm:px-6 sm:py-14 md:grid-cols-[13rem_1fr] md:gap-14"
+>
 	<nav aria-label="Mi cuenta">
-		<ul class="flex gap-2 overflow-x-auto md:flex-col">
+		<p class="eyebrow mb-4 hidden md:block">Mi cuenta</p>
+		<ul
+			class="-mx-4 flex [scrollbar-width:none] gap-1 overflow-x-auto px-4 md:mx-0 md:flex-col md:px-0"
+		>
 			{#each links as link (link.href)}
 				{@const active = page.url.pathname.startsWith(`/${link.href}`)}
 				<li>
 					<a
 						href={resolve(link.href)}
 						aria-current={active ? 'page' : undefined}
-						class="block rounded-md px-3 py-2 text-sm whitespace-nowrap {active
-							? 'bg-teal-50 font-medium text-teal-800'
-							: 'text-slate-700 hover:bg-slate-100'}">{link.label}</a
+						class="flex min-h-10 items-center rounded-full px-4 text-sm whitespace-nowrap transition-colors duration-200 {active
+							? 'bg-stone-900 font-medium text-white'
+							: 'text-stone-700 hover:bg-stone-100 hover:text-stone-950'}">{link.label}</a
 					>
 				</li>
 			{/each}

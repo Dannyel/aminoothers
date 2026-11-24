@@ -16,7 +16,7 @@
 
 	let { data }: PageProps = $props();
 	const field =
-		'rounded-md border-slate-300 text-sm shadow-sm focus:border-teal-600 focus:ring-teal-600';
+		'rounded-lg border-stone-300 text-sm shadow-sm focus:border-brand-600 focus:ring-brand-600';
 </script>
 
 <PageHeading
@@ -27,7 +27,7 @@
 		{#if can(data.staff, 'promotions.manage')}
 			<a
 				href={resolve('admin/promociones/nueva')}
-				class="rounded-md bg-teal-700 px-3 py-2 text-sm font-medium text-white hover:bg-teal-800"
+				class="rounded-lg bg-brand-700 px-3 py-2 text-sm font-medium text-white hover:bg-brand-800"
 				>Nueva promoción</a
 			>
 		{/if}
@@ -36,11 +36,11 @@
 
 <form method="get" class="mb-4 flex flex-wrap items-end gap-3" role="search">
 	<label class="flex flex-col gap-1 text-sm">
-		<span class="font-medium text-slate-700">Buscar</span>
+		<span class="font-medium text-stone-700">Buscar</span>
 		<input type="search" name="search" value={data.search} maxlength={100} class={field} />
 	</label>
 	<label class="flex flex-col gap-1 text-sm">
-		<span class="font-medium text-slate-700">Estado</span>
+		<span class="font-medium text-stone-700">Estado</span>
 		<select name="state" value={data.state} class={field}>
 			<option value="">Todas</option>
 			{#each data.states as s (s)}<option value={s}
@@ -49,7 +49,7 @@
 		</select>
 	</label>
 	<button
-		class="rounded-md border border-slate-300 bg-white px-4 py-2 text-sm font-medium hover:bg-slate-50"
+		class="rounded-lg border border-stone-300 bg-white px-4 py-2 text-sm font-medium hover:bg-stone-50"
 		>Filtrar</button
 	>
 </form>
@@ -57,10 +57,10 @@
 {#if data.promotions.items.length === 0}
 	<EmptyState title="No hay promociones" />
 {:else}
-	<div class="overflow-x-auto rounded-lg border border-slate-200 bg-white">
-		<table class="min-w-full divide-y divide-slate-200 text-sm">
+	<div class="card overflow-x-auto">
+		<table class="min-w-full divide-y divide-stone-200 text-sm">
 			<thead
-				class="bg-slate-50 text-left text-xs font-medium tracking-wide text-slate-500 uppercase"
+				class="bg-stone-50 text-left text-xs font-medium tracking-wide text-stone-500 uppercase"
 			>
 				<tr>
 					<th class="px-4 py-3">Promoción</th>
@@ -70,13 +70,13 @@
 					<th class="px-4 py-3">Estado</th>
 				</tr>
 			</thead>
-			<tbody class="divide-y divide-slate-100">
+			<tbody class="divide-y divide-stone-100">
 				{#each data.promotions.items as p (p.id)}
 					<tr>
 						<td class="px-4 py-3">
 							<a
 								href={resolve(`admin/promociones/${p.id}`)}
-								class="font-medium text-teal-800 hover:underline">{p.name}</a
+								class="font-medium text-brand-800 hover:underline">{p.name}</a
 							>
 						</td>
 						<td class="px-4 py-3">{promotionValue(p.type, p.value)}</td>

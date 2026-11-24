@@ -18,10 +18,10 @@
 {#if data.result.items.length === 0}
 	<EmptyState title="No hay clientes que coincidan con la búsqueda" />
 {:else}
-	<div class="overflow-x-auto rounded-lg border border-slate-200 bg-white">
-		<table class="min-w-full divide-y divide-slate-200 text-sm">
+	<div class="card overflow-x-auto">
+		<table class="min-w-full divide-y divide-stone-200 text-sm">
 			<thead
-				class="bg-slate-50 text-left text-xs font-medium tracking-wide text-slate-500 uppercase"
+				class="bg-stone-50 text-left text-xs font-medium tracking-wide text-stone-500 uppercase"
 			>
 				<tr>
 					<th class="px-4 py-3">Cliente</th>
@@ -30,27 +30,27 @@
 					<th class="px-4 py-3">Registro</th>
 				</tr>
 			</thead>
-			<tbody class="divide-y divide-slate-100">
+			<tbody class="divide-y divide-stone-100">
 				{#each data.result.items as customer (customer.id)}
-					<tr class="hover:bg-slate-50">
+					<tr class="hover:bg-stone-50">
 						<td class="px-4 py-3">
 							<a
 								href={resolve(`admin/clientes/${customer.id}`)}
-								class="font-medium text-teal-800 hover:underline"
+								class="font-medium text-brand-800 hover:underline"
 							>
 								{customer.firstName}
 								{customer.lastName}
 							</a>
-							<p class="text-slate-500">{customer.email}</p>
+							<p class="text-stone-500">{customer.email}</p>
 						</td>
-						<td class="px-4 py-3 text-slate-700">{customer.phone ?? '—'}</td>
+						<td class="px-4 py-3 text-stone-700">{customer.phone ?? '—'}</td>
 						<td class="px-4 py-3">
 							<Badge tone={USER_STATUS_TONES[customer.status]}
 								>{USER_STATUS_LABELS[customer.status]}</Badge
 							>
 							{#if !customer.emailVerified}<Badge tone="warning">Correo sin confirmar</Badge>{/if}
 						</td>
-						<td class="px-4 py-3 text-slate-600">{formatDateTime(customer.createdAt)}</td>
+						<td class="px-4 py-3 text-stone-600">{formatDateTime(customer.createdAt)}</td>
 					</tr>
 				{/each}
 			</tbody>

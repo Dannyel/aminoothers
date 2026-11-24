@@ -15,10 +15,10 @@
 <AuthCard title="Crear cuenta" subtitle="Solo los clientes registrados pueden comprar.">
 	{#if form && 'success' in form}
 		<Alert variant="success" messages={form.success} />
-		<p class="mt-4 text-sm text-slate-600">
+		<p class="mt-4 text-sm text-stone-600">
 			Cuando confirme su correo podrá <a
 				href={resolve('login')}
-				class="text-teal-700 hover:underline">iniciar sesión</a
+				class="text-brand-700 hover:underline">iniciar sesión</a
 			> y comprar.
 		</p>
 	{:else}
@@ -87,7 +87,7 @@
 		</form>
 	{/if}
 	{#snippet footer()}
-		¿Ya tiene cuenta? <a href={resolve('login')} class="font-medium text-teal-700 hover:underline"
+		¿Ya tiene cuenta? <a href={resolve('login')} class="font-medium text-brand-700 hover:underline"
 			>Inicie sesión</a
 		>
 	{/snippet}

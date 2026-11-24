@@ -25,9 +25,9 @@
 </script>
 
 <div class="relative">
-	<p class="mb-2 h-5 text-sm text-slate-600" aria-live="polite">
+	<p class="mb-2 h-5 text-sm text-stone-600" aria-live="polite">
 		{#if current}
-			<span class="font-medium text-slate-900">{formatDate(current.date)}</span>:
+			<span class="font-medium text-stone-900">{formatDate(current.date)}</span>:
 			{formatMoney(current.total)} · {current.orders} pedido(s)
 		{:else}
 			Pase el cursor sobre una barra para ver el detalle del día.
@@ -40,11 +40,11 @@
 		role="img"
 		aria-label="Ventas por día de los últimos {days.length} días"
 	>
-		<line x1="0" x2={W} y1={H + 0.5} y2={H + 0.5} class="stroke-slate-300" stroke-width="1" />
+		<line x1="0" x2={W} y1={H + 0.5} y2={H + 0.5} class="stroke-stone-300" stroke-width="1" />
 		{#each days as day, i (day.date)}
 			<path
 				d={barPath(i, Number(day.total))}
-				class={active === i ? 'fill-teal-800' : 'fill-teal-600'}
+				class={active === i ? 'fill-brand-800' : 'fill-brand-600'}
 			/>
 			<!-- Zona de interacción más grande que la barra (toda la columna). -->
 			<rect
@@ -59,7 +59,7 @@
 			/>
 		{/each}
 	</svg>
-	<div class="mt-1 flex justify-between text-xs text-slate-500">
+	<div class="mt-1 flex justify-between text-xs text-stone-500">
 		<span>{formatDate(days[0]?.date)}</span>
 		<span>{formatDate(days.at(-1)?.date)}</span>
 	</div>

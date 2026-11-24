@@ -16,7 +16,7 @@
 
 	let { data }: PageProps = $props();
 	const field =
-		'rounded-md border-slate-300 text-sm shadow-sm focus:border-teal-600 focus:ring-teal-600';
+		'rounded-lg border-stone-300 text-sm shadow-sm focus:border-brand-600 focus:ring-brand-600';
 </script>
 
 <PageHeading title="Órdenes de compra">
@@ -24,7 +24,7 @@
 		{#if can(data.staff, 'purchases.manage')}
 			<a
 				href={resolve('admin/compras/nueva')}
-				class="rounded-md bg-teal-700 px-4 py-2 text-sm font-medium text-white hover:bg-teal-800"
+				class="rounded-lg bg-brand-700 px-4 py-2 text-sm font-medium text-white hover:bg-brand-800"
 				>Nueva orden</a
 			>
 		{/if}
@@ -34,11 +34,11 @@
 <form method="get" class="mb-4 flex flex-wrap items-end gap-3" role="search">
 	<input type="hidden" name="supplierId" value={data.filters.supplierId} />
 	<label class="flex min-w-60 flex-1 flex-col gap-1 text-sm">
-		<span class="font-medium text-slate-700">Buscar (número o proveedor)</span>
+		<span class="font-medium text-stone-700">Buscar (número o proveedor)</span>
 		<input type="search" name="search" value={data.filters.search} maxlength={100} class={field} />
 	</label>
 	<label class="flex flex-col gap-1 text-sm">
-		<span class="font-medium text-slate-700">Estado</span>
+		<span class="font-medium text-stone-700">Estado</span>
 		<select name="status" value={data.filters.status} class={field}>
 			<option value="">Todos</option>
 			{#each Object.entries(PURCHASE_ORDER_STATUS_LABELS) as [value, label] (value)}<option {value}
@@ -47,7 +47,7 @@
 		</select>
 	</label>
 	<button
-		class="rounded-md border border-slate-300 bg-white px-4 py-2 text-sm font-medium hover:bg-slate-50"
+		class="rounded-lg border border-stone-300 bg-white px-4 py-2 text-sm font-medium hover:bg-stone-50"
 	>
 		Filtrar
 	</button>
@@ -56,10 +56,10 @@
 {#if data.orders.items.length === 0}
 	<EmptyState title="No hay órdenes de compra" />
 {:else}
-	<div class="overflow-x-auto rounded-lg border border-slate-200 bg-white">
-		<table class="min-w-full divide-y divide-slate-200 text-sm">
+	<div class="card overflow-x-auto">
+		<table class="min-w-full divide-y divide-stone-200 text-sm">
 			<thead
-				class="bg-slate-50 text-left text-xs font-medium tracking-wide text-slate-500 uppercase"
+				class="bg-stone-50 text-left text-xs font-medium tracking-wide text-stone-500 uppercase"
 			>
 				<tr>
 					<th class="px-4 py-3">Orden</th>
@@ -69,13 +69,13 @@
 					<th class="px-4 py-3 text-right">Total</th>
 				</tr>
 			</thead>
-			<tbody class="divide-y divide-slate-100">
+			<tbody class="divide-y divide-stone-100">
 				{#each data.orders.items as order (order.id)}
-					<tr class="hover:bg-slate-50">
+					<tr class="hover:bg-stone-50">
 						<td class="px-4 py-3">
 							<a
 								href={resolve(`admin/compras/${order.id}`)}
-								class="font-medium text-teal-800 hover:underline"
+								class="font-medium text-brand-800 hover:underline"
 							>
 								{formatOrderNumber('OC', order.number)}
 							</a>

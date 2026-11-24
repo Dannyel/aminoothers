@@ -27,7 +27,7 @@
 
 <form
 	method="post"
-	class="flex flex-col gap-4 rounded-lg border border-slate-200 bg-white p-6"
+	class="card flex flex-col gap-4 p-6"
 	use:enhance={() => {
 		submitting = true;
 		return async ({ update }) => {
@@ -103,11 +103,11 @@
 		value={address?.reference ?? ''}
 	/>
 	{#if showDefault}
-		<label class="flex items-center gap-2 text-sm text-slate-700">
+		<label class="flex items-center gap-2 text-sm text-stone-700">
 			<input
 				type="checkbox"
 				name="isDefault"
-				class="rounded border-slate-300 text-teal-700 focus:ring-teal-600"
+				class="rounded border-stone-300 text-brand-700 focus:ring-brand-600"
 			/>
 			Usar como dirección predeterminada
 		</label>
@@ -116,7 +116,7 @@
 		<Button type="submit" loading={submitting}>{submitLabel}</Button>
 		<a
 			href={resolve('cuenta/direcciones')}
-			class="rounded-md px-4 py-2 text-sm text-slate-700 hover:bg-slate-100">Cancelar</a
+			class="rounded-lg px-4 py-2 text-sm text-stone-700 hover:bg-stone-100">Cancelar</a
 		>
 	</div>
 </form>

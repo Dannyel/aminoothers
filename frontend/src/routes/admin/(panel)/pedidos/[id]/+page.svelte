@@ -40,8 +40,8 @@
 		async ({ update }: { update: (o: { reset: boolean }) => Promise<void> }) =>
 			update({ reset: true });
 	const field =
-		'rounded-md border-slate-300 text-sm shadow-sm focus:border-teal-600 focus:ring-teal-600';
-	const box = 'flex flex-col gap-3 rounded-lg border border-slate-200 bg-white p-5 text-sm';
+		'rounded-lg border-stone-300 text-sm shadow-sm focus:border-brand-600 focus:ring-brand-600';
+	const box = 'flex flex-col gap-3 card p-5 text-sm';
 	const proofPath = (paymentId: string) => resolve(`admin/pagos/${paymentId}/comprobante`);
 </script>
 
@@ -52,7 +52,7 @@
 	{#snippet actions()}
 		<a
 			href={resolve('admin/pedidos')}
-			class="rounded-md px-3 py-2 text-sm text-slate-700 hover:bg-slate-200">← Pedidos</a
+			class="rounded-lg px-3 py-2 text-sm text-stone-700 hover:bg-stone-200">← Pedidos</a
 		>
 	{/snippet}
 </PageHeading>
@@ -65,10 +65,10 @@
 		<Badge tone={ORDER_STATUS_TONES[order.status]}>{ORDER_STATUS_LABELS[order.status]}</Badge>
 		<span>{PAYMENT_METHOD_LABELS[order.paymentMethod]} · {formatMoney(order.total)}</span>
 		{#if order.reservationExpiresAt && ['PENDING_PAYMENT', 'PENDING_CONFIRMATION'].includes(order.status)}
-			<span class="text-slate-600">Reserva hasta {formatDateTime(order.reservationExpiresAt)}</span>
+			<span class="text-stone-600">Reserva hasta {formatDateTime(order.reservationExpiresAt)}</span>
 		{/if}
 		{#if order.cancelReason}
-			<span class="text-slate-600">
+			<span class="text-stone-600">
 				Cancelado: {order.cancelReason}{order.cancelledBy ? ` (${order.cancelledBy.name})` : ''}
 			</span>
 		{/if}
@@ -77,7 +77,7 @@
 	<!-- Acciones del flujo según el estado y los permisos. -->
 	{#if order.actions.length > 0}
 		<section class="{box} gap-4">
-			<h2 class="font-semibold text-slate-900">Acciones</h2>
+			<h2 class="font-semibold text-stone-900">Acciones</h2>
 			<div class="flex flex-wrap gap-3">
 				{#if has('confirm') && allowed('orders.manage')}
 					<form method="post" action="?/confirm" use:enhance>
@@ -99,17 +99,17 @@
 					use:enhance={keep}
 				>
 					<label class="flex flex-col gap-1">
-						<span class="font-medium text-slate-700">Mensajería</span>
+						<span class="font-medium text-stone-700">Mensajería</span>
 						<select name="courierId" required class={field}>
 							{#each data.couriers as c (c.id)}<option value={c.id}>{c.name}</option>{/each}
 						</select>
 					</label>
 					<label class="flex flex-col gap-1">
-						<span class="font-medium text-slate-700">Número de guía</span>
+						<span class="font-medium text-stone-700">Número de guía</span>
 						<input name="trackingNumber" maxlength={100} class={field} />
 					</label>
 					<label class="flex flex-col gap-1">
-						<span class="font-medium text-slate-700">Costo de la mensajería (Q)</span>
+						<span class="font-medium text-stone-700">Costo de la mensajería (Q)</span>
 						<input
 							name="courierCost"
 							inputmode="decimal"
@@ -123,7 +123,7 @@
 							Registre una mensajería activa para despachar.
 						</p>
 					{/if}
-					<p class="text-xs text-slate-500 sm:col-span-4">
+					<p class="text-xs text-stone-500 sm:col-span-4">
 						Al despachar se descuentan del inventario los lotes reservados.
 					</p>
 				</form>
@@ -137,18 +137,18 @@
 					use:enhance={keep}
 				>
 					<label class="flex flex-col gap-1">
-						<span class="font-medium text-slate-700">Seguimiento</span>
+						<span class="font-medium text-stone-700">Seguimiento</span>
 						<select name="status" class={field}>
 							<option value="IN_TRANSIT">En tránsito</option>
 							<option value="DISPATCHED">Despachado</option>
 						</select>
 					</label>
 					<label class="flex flex-col gap-1">
-						<span class="font-medium text-slate-700">Descripción</span>
+						<span class="font-medium text-stone-700">Descripción</span>
 						<input name="description" required maxlength={300} class={field} />
 					</label>
 					<label class="flex flex-col gap-1">
-						<span class="font-medium text-slate-700">Ubicación</span>
+						<span class="font-medium text-stone-700">Ubicación</span>
 						<input name="location" maxlength={150} class={field} />
 					</label>
 					<Button type="submit" variant="secondary">Agregar evento</Button>
@@ -163,12 +163,12 @@
 					use:enhance={keep}
 				>
 					<label class="flex flex-col gap-1">
-						<span class="font-medium text-slate-700">Recibió</span>
+						<span class="font-medium text-stone-700">Recibió</span>
 						<input name="receivedByName" maxlength={150} class={field} />
 					</label>
 					{#if isCod}
 						<label class="flex flex-col gap-1">
-							<span class="font-medium text-slate-700">Monto cobrado (Q)</span>
+							<span class="font-medium text-stone-700">Monto cobrado (Q)</span>
 							<input
 								name="collectedAmount"
 								required
@@ -180,7 +180,7 @@
 						</label>
 					{/if}
 					<label class="flex flex-col gap-1">
-						<span class="font-medium text-slate-700"
+						<span class="font-medium text-stone-700"
 							>Nota{isCod ? ' (obligatoria si el cobro difiere)' : ''}</span
 						>
 						<input name="note" maxlength={500} class={field} />
@@ -197,7 +197,7 @@
 					use:enhance={keep}
 				>
 					<label class="flex flex-1 flex-col gap-1">
-						<span class="font-medium text-slate-700">Motivo de la entrega fallida</span>
+						<span class="font-medium text-stone-700">Motivo de la entrega fallida</span>
 						<input name="note" required maxlength={500} class={field} />
 					</label>
 					<Button type="submit" variant="secondary">Entrega fallida</Button>
@@ -212,11 +212,11 @@
 					use:enhance={keep}
 				>
 					<label class="flex flex-col gap-1">
-						<span class="font-medium text-slate-700">Nueva guía (opcional)</span>
+						<span class="font-medium text-stone-700">Nueva guía (opcional)</span>
 						<input name="trackingNumber" maxlength={100} class={field} />
 					</label>
 					<label class="flex flex-1 flex-col gap-1">
-						<span class="font-medium text-slate-700">Nota</span>
+						<span class="font-medium text-stone-700">Nota</span>
 						<input name="note" maxlength={500} class={field} />
 					</label>
 					<Button type="submit">Reintentar entrega</Button>
@@ -231,7 +231,7 @@
 					use:enhance={keep}
 				>
 					<label class="flex flex-1 flex-col gap-1">
-						<span class="font-medium text-slate-700">El paquete volvió a la farmacia</span>
+						<span class="font-medium text-stone-700">El paquete volvió a la farmacia</span>
 						<input name="note" required maxlength={500} class={field} />
 					</label>
 					<Button type="submit" variant="secondary">Registrar devolución del paquete</Button>
@@ -246,7 +246,7 @@
 					use:enhance={keep}
 				>
 					<label class="flex flex-1 flex-col gap-1">
-						<span class="font-medium text-slate-700">Motivo de la cancelación</span>
+						<span class="font-medium text-stone-700">Motivo de la cancelación</span>
 						<input name="reason" required maxlength={500} class={field} />
 					</label>
 					<ConfirmButton
@@ -262,7 +262,7 @@
 
 	<div class="grid gap-4 md:grid-cols-2">
 		<section class={box}>
-			<h2 class="font-semibold text-slate-900">Cliente y entrega</h2>
+			<h2 class="font-semibold text-stone-900">Cliente y entrega</h2>
 			<p>
 				{order.customerName} · {order.customerEmail}{order.customerPhone
 					? ` · ${order.customerPhone}`
@@ -273,7 +273,7 @@
 				<p>
 					<a
 						href={resolve(`admin/facturacion/${order.receipt.id}`)}
-						class="text-teal-800 hover:underline"
+						class="text-brand-800 hover:underline"
 						>Comprobante {formatOrderNumber('CI', order.receipt.number)}</a
 					>
 					· {order.receipt.status === 'VOIDED'
@@ -283,22 +283,22 @@
 							: 'FEL pendiente'}
 				</p>
 			{/if}
-			<p class="text-slate-600">
+			<p class="text-stone-600">
 				{s.recipientName} · {s.phone}<br />
 				{s.addressLine1}{s.addressLine2 ? `, ${s.addressLine2}` : ''}{s.zone
 					? `, zona ${s.zone}`
 					: ''},
 				{s.municipality}, {s.department}
 			</p>
-			{#if s.reference}<p class="text-slate-500">Referencia: {s.reference}</p>{/if}
-			{#if order.customerNotes}<p class="text-slate-500">
+			{#if s.reference}<p class="text-stone-500">Referencia: {s.reference}</p>{/if}
+			{#if order.customerNotes}<p class="text-stone-500">
 					Indicaciones: {order.customerNotes}
 				</p>{/if}
 			<p>Envío: {s.methodName} ({formatMoney(s.cost)})</p>
 		</section>
 
 		<section class={box}>
-			<h2 class="font-semibold text-slate-900">Envío</h2>
+			<h2 class="font-semibold text-stone-900">Envío</h2>
 			{#if order.adminShipment}
 				{@const sh = order.adminShipment}
 				<p>
@@ -311,32 +311,32 @@
 						href={sh.trackingUrl}
 						target="_blank"
 						rel="noopener noreferrer"
-						class="text-teal-800 hover:underline">Rastrear ↗</a
+						class="text-brand-800 hover:underline">Rastrear ↗</a
 					>
 				{/if}
-				{#if sh.courierCost}<p class="text-slate-500">
+				{#if sh.courierCost}<p class="text-stone-500">
 						Costo de la mensajería: {formatMoney(sh.courierCost)}
 					</p>{/if}
-				<ol class="flex flex-col gap-1 border-l border-slate-200 pl-3">
+				<ol class="flex flex-col gap-1 border-l border-stone-200 pl-3">
 					{#each sh.events as e, i (i)}
 						<li>
 							{e.description}
-							<span class="text-xs text-slate-500"
+							<span class="text-xs text-stone-500"
 								>· {formatDateTime(e.occurredAt)}{e.location ? ` · ${e.location}` : ''}</span
 							>
 						</li>
 					{/each}
 				</ol>
 			{:else}
-				<p class="text-slate-500">Aún no se despacha.</p>
+				<p class="text-stone-500">Aún no se despacha.</p>
 			{/if}
 		</section>
 	</div>
 
 	<section class={box}>
-		<h2 class="font-semibold text-slate-900">Productos y lotes</h2>
+		<h2 class="font-semibold text-stone-900">Productos y lotes</h2>
 		<table class="min-w-full text-sm">
-			<thead class="text-left text-xs text-slate-500 uppercase">
+			<thead class="text-left text-xs text-stone-500 uppercase">
 				<tr>
 					<th class="py-2">Producto</th>
 					<th class="py-2 text-right">Precio</th>
@@ -345,12 +345,12 @@
 					<th class="py-2 text-right">Total</th>
 				</tr>
 			</thead>
-			<tbody class="divide-y divide-slate-100">
+			<tbody class="divide-y divide-stone-100">
 				{#each order.items as item (item.id)}
 					<tr>
 						<td class="py-2">
-							{item.productName} <span class="text-xs text-slate-500">{item.sku}</span>
-							<ul class="text-xs text-slate-500">
+							{item.productName} <span class="text-xs text-stone-500">{item.sku}</span>
+							<ul class="text-xs text-stone-500">
 								{#each order.reservations.filter((r) => r.orderItemId === item.id) as r (r.lotId)}
 									<li>
 										Lote {r.lotNumber} (vence {formatDate(r.expirationDate)}): {r.quantity} · {r.status}
@@ -378,13 +378,13 @@
 	</section>
 
 	<section class={box}>
-		<h2 class="font-semibold text-slate-900">Pagos</h2>
+		<h2 class="font-semibold text-stone-900">Pagos</h2>
 		{#each order.payments as p (p.id)}
-			<div class="flex flex-col gap-2 rounded-md border border-slate-200 p-3">
+			<div class="flex flex-col gap-2 rounded-lg border border-stone-200 p-3">
 				<div class="flex flex-wrap items-center gap-2">
 					<Badge tone={PAYMENT_STATUS_TONES[p.status]}>{PAYMENT_STATUS_LABELS[p.status]}</Badge>
 					<span>{PAYMENT_METHOD_LABELS[p.method]} · {formatMoney(p.amount)}</span>
-					<span class="text-xs text-slate-500">{formatDateTime(p.createdAt)}</span>
+					<span class="text-xs text-stone-500">{formatDateTime(p.createdAt)}</span>
 				</div>
 				{#if p.bankAccount}
 					<p>
@@ -399,12 +399,12 @@
 						href={proofPath(p.id)}
 						target="_blank"
 						rel="noopener"
-						class="text-teal-800 hover:underline"
+						class="text-brand-800 hover:underline"
 						>Ver comprobante ({p.proofMimeType === 'application/pdf' ? 'PDF' : 'imagen'}) ↗</a
 					>
 				{/if}
 				{#if p.rejectionReason}<p class="text-red-700">Rechazado: {p.rejectionReason}</p>{/if}
-				{#if p.verifiedBy}<p class="text-slate-500">
+				{#if p.verifiedBy}<p class="text-stone-500">
 						Verificó {p.verifiedBy.name} · {formatDateTime(p.verifiedAt)}
 					</p>{/if}
 				{#if p.collectedAmount}
@@ -412,7 +412,7 @@
 						Cobrado {formatMoney(p.collectedAmount)} por {p.collectedBy?.name} · {formatDateTime(
 							p.collectedAt
 						)}
-						{#if p.collectionNote}<span class="text-slate-500">· {p.collectionNote}</span>{/if}
+						{#if p.collectionNote}<span class="text-stone-500">· {p.collectionNote}</span>{/if}
 					</p>
 				{/if}
 
@@ -430,7 +430,7 @@
 						>
 							<input type="hidden" name="paymentId" value={p.id} />
 							<label class="flex flex-1 flex-col gap-1">
-								<span class="font-medium text-slate-700">Motivo del rechazo</span>
+								<span class="font-medium text-stone-700">Motivo del rechazo</span>
 								<input name="reason" required maxlength={500} class={field} />
 							</label>
 							<Button type="submit" variant="danger">Rechazar</Button>
@@ -446,7 +446,7 @@
 								<span
 									>Reembolso {formatMoney(r.amount)} · {REFUND_METHOD_LABELS[r.method]} · {r.reason}</span
 								>
-								{#if r.reference}<span class="text-slate-500">Ref. {r.reference}</span>{/if}
+								{#if r.reference}<span class="text-stone-500">Ref. {r.reference}</span>{/if}
 								{#if r.status === 'PENDING' && allowed('refunds.manage')}
 									<form
 										method="post"
@@ -483,7 +483,7 @@
 					>
 						<input type="hidden" name="paymentId" value={p.id} />
 						<label class="flex flex-col gap-1">
-							<span class="font-medium text-slate-700"
+							<span class="font-medium text-stone-700"
 								>Reembolsar (máx. {formatMoney(p.refundableAmount)})</span
 							>
 							<input
@@ -495,14 +495,14 @@
 							/>
 						</label>
 						<label class="flex flex-col gap-1">
-							<span class="font-medium text-slate-700">Medio</span>
+							<span class="font-medium text-stone-700">Medio</span>
 							<select name="method" class={field}>
 								<option value="BANK_TRANSFER">Transferencia</option>
 								<option value="CASH">Efectivo</option>
 							</select>
 						</label>
 						<label class="flex flex-col gap-1">
-							<span class="font-medium text-slate-700">Devolución</span>
+							<span class="font-medium text-stone-700">Devolución</span>
 							<select name="returnId" class={field}>
 								<option value="">Ninguna</option>
 								{#each order.returns as ret (ret.id)}
@@ -511,7 +511,7 @@
 							</select>
 						</label>
 						<label class="flex flex-col gap-1">
-							<span class="font-medium text-slate-700">Motivo</span>
+							<span class="font-medium text-stone-700">Motivo</span>
 							<input name="reason" required maxlength={500} class={field} />
 						</label>
 						<Button type="submit" variant="secondary">Registrar reembolso</Button>
@@ -522,9 +522,9 @@
 	</section>
 
 	<section class={box}>
-		<h2 class="font-semibold text-slate-900">Devoluciones</h2>
+		<h2 class="font-semibold text-stone-900">Devoluciones</h2>
 		{#if order.returnDeadline}
-			<p class="text-slate-500">
+			<p class="text-stone-500">
 				Plazo para registrar devoluciones: hasta el {formatDate(order.returnDeadline)}.
 			</p>
 		{/if}
@@ -532,27 +532,27 @@
 			<div class="flex flex-wrap items-center gap-2">
 				<a
 					href={resolve(`admin/devoluciones/${ret.id}`)}
-					class="font-medium text-teal-800 hover:underline">DEV-{ret.number}</a
+					class="font-medium text-brand-800 hover:underline">DEV-{ret.number}</a
 				>
 				<Badge tone={RETURN_STATUS_TONES[ret.status]}>{RETURN_STATUS_LABELS[ret.status]}</Badge>
 				<span>{ret.reason} · {formatMoney(ret.amount)}</span>
-				<span class="text-xs text-slate-500">
+				<span class="text-xs text-stone-500">
 					{ret.items
 						.map((i) => `${i.quantity} × ${i.productName} (${DISPOSITION_LABELS[i.disposition]})`)
 						.join('; ')}
 				</span>
 			</div>
 		{:else}
-			<p class="text-slate-500">Sin devoluciones.</p>
+			<p class="text-stone-500">Sin devoluciones.</p>
 		{/each}
 		{#if has('createReturn') && allowed('returns.manage')}
 			<form
 				method="post"
 				action="?/createReturn"
-				class="flex flex-col gap-3 border-t border-slate-100 pt-3"
+				class="flex flex-col gap-3 border-t border-stone-100 pt-3"
 				use:enhance={keep}
 			>
-				<h3 class="font-medium text-slate-800">Registrar devolución</h3>
+				<h3 class="font-medium text-stone-800">Registrar devolución</h3>
 				{#each order.items.filter((i) => i.quantityReturned < i.quantity) as item (item.id)}
 					<label class="flex items-center gap-3">
 						<input type="hidden" name="orderItemId" value={item.id} />
@@ -569,7 +569,7 @@
 				{/each}
 				<input name="reason" required maxlength={500} placeholder="Motivo" class={field} />
 				<input name="notes" maxlength={1000} placeholder="Notas (opcional)" class={field} />
-				<p class="text-xs text-slate-500">
+				<p class="text-xs text-stone-500">
 					Las unidades devueltas no vuelven al inventario hasta que el regente las inspeccione.
 				</p>
 				<div><Button type="submit" variant="secondary">Registrar devolución</Button></div>
@@ -578,12 +578,12 @@
 	</section>
 
 	<section class={box}>
-		<h2 class="font-semibold text-slate-900">Historial</h2>
+		<h2 class="font-semibold text-stone-900">Historial</h2>
 		<ol class="flex flex-col gap-1">
 			{#each order.history as h, i (i)}
 				<li class="flex flex-wrap justify-between gap-2">
 					<span>{ORDER_STATUS_LABELS[h.toStatus]}{h.note ? ` · ${h.note}` : ''}</span>
-					<span class="text-slate-500">{formatDateTime(h.createdAt)}</span>
+					<span class="text-stone-500">{formatDateTime(h.createdAt)}</span>
 				</li>
 			{/each}
 		</ol>

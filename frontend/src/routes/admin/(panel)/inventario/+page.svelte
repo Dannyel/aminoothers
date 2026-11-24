@@ -47,8 +47,8 @@
 				href={tabHref(tab.value)}
 				aria-current={data.alert === tab.value ? 'page' : undefined}
 				class="rounded-full border px-3 py-1 text-sm {data.alert === tab.value
-					? 'border-teal-700 bg-teal-700 text-white'
-					: 'border-slate-300 bg-white text-slate-700 hover:bg-slate-50'}"
+					? 'border-brand-700 bg-brand-700 text-white'
+					: 'border-stone-300 bg-white text-stone-700 hover:bg-stone-50'}"
 			>
 				{tab.label}
 				{#if tab.count}<span class="ml-1 font-semibold">{tab.count}</span>{/if}
@@ -59,17 +59,17 @@
 	<form method="get" class="flex flex-wrap items-end gap-3" role="search">
 		<input type="hidden" name="alerta" value={data.alert === 'all' ? '' : data.alert} />
 		<label class="flex min-w-60 flex-1 flex-col gap-1 text-sm">
-			<span class="font-medium text-slate-700">Buscar producto</span>
+			<span class="font-medium text-stone-700">Buscar producto</span>
 			<input
 				type="search"
 				name="search"
 				value={data.search}
 				maxlength={100}
-				class="rounded-md border-slate-300 text-sm shadow-sm focus:border-teal-600 focus:ring-teal-600"
+				class="rounded-lg border-stone-300 text-sm shadow-sm focus:border-brand-600 focus:ring-brand-600"
 			/>
 		</label>
 		<button
-			class="rounded-md border border-slate-300 bg-white px-4 py-2 text-sm font-medium hover:bg-slate-50"
+			class="rounded-lg border border-stone-300 bg-white px-4 py-2 text-sm font-medium hover:bg-stone-50"
 			>Buscar</button
 		>
 	</form>
@@ -77,10 +77,10 @@
 	{#if data.stock.items.length === 0}
 		<EmptyState title="No hay productos que coincidan" />
 	{:else}
-		<div class="overflow-x-auto rounded-lg border border-slate-200 bg-white">
-			<table class="min-w-full divide-y divide-slate-200 text-sm">
+		<div class="card overflow-x-auto">
+			<table class="min-w-full divide-y divide-stone-200 text-sm">
 				<thead
-					class="bg-slate-50 text-left text-xs font-medium tracking-wide text-slate-500 uppercase"
+					class="bg-stone-50 text-left text-xs font-medium tracking-wide text-stone-500 uppercase"
 				>
 					<tr>
 						<th class="px-4 py-3">Producto</th>
@@ -92,15 +92,15 @@
 						<th class="px-4 py-3">Próx. vencimiento</th>
 					</tr>
 				</thead>
-				<tbody class="divide-y divide-slate-100">
+				<tbody class="divide-y divide-stone-100">
 					{#each data.stock.items as row (row.productId)}
-						<tr class="hover:bg-slate-50">
+						<tr class="hover:bg-stone-50">
 							<td class="px-4 py-3">
 								<a
 									href={resolve(`admin/inventario/${row.productId}`)}
-									class="font-medium text-teal-800 hover:underline">{row.name}</a
+									class="font-medium text-brand-800 hover:underline">{row.name}</a
 								>
-								<p class="text-slate-500">
+								<p class="text-stone-500">
 									{row.sku}
 									{#if !row.isActive}<Badge>Inactivo</Badge>{/if}
 									{#if row.isLowStock}<Badge tone="warning"
@@ -131,8 +131,8 @@
 	{/if}
 
 	{#if can(data.staff, 'inventory.settings')}
-		<details class="rounded-lg border border-slate-200 bg-white p-4">
-			<summary class="cursor-pointer text-sm font-medium text-slate-800"
+		<details class="card p-4">
+			<summary class="cursor-pointer text-sm font-medium text-stone-800"
 				>Parámetros de vencimiento</summary
 			>
 			<form

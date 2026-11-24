@@ -46,7 +46,7 @@
 		label
 	}));
 	const selectClass =
-		'rounded-md border-slate-300 text-sm shadow-sm focus:border-teal-600 focus:ring-teal-600';
+		'rounded-lg border-stone-300 text-sm shadow-sm focus:border-brand-600 focus:ring-brand-600';
 </script>
 
 <form
@@ -62,11 +62,8 @@
 	}}
 >
 	<Alert variant="error" {messages} />
-	<fieldset
-		class="grid gap-4 rounded-lg border border-slate-200 bg-white p-6 sm:grid-cols-2"
-		{disabled}
-	>
-		<legend class="px-1 font-medium text-slate-900">Identificación</legend>
+	<fieldset class="card grid gap-4 p-6 sm:grid-cols-2" {disabled}>
+		<legend class="px-1 font-medium text-stone-900">Identificación</legend>
 		<TextField
 			label="SKU"
 			name="sku"
@@ -100,22 +97,19 @@
 			/>
 		</div>
 		<label class="flex flex-col gap-1 text-sm sm:col-span-2">
-			<span class="font-medium text-slate-700">Descripción completa</span>
+			<span class="font-medium text-stone-700">Descripción completa</span>
 			<textarea
 				name="description"
 				rows="5"
 				maxlength={10000}
-				class="rounded-md border-slate-300 text-sm shadow-sm focus:border-teal-600 focus:ring-teal-600"
+				class="rounded-lg border-stone-300 text-sm shadow-sm focus:border-brand-600 focus:ring-brand-600"
 				>{product?.description ?? ''}</textarea
 			>
 		</label>
 	</fieldset>
 
-	<fieldset
-		class="grid gap-4 rounded-lg border border-slate-200 bg-white p-6 sm:grid-cols-2"
-		{disabled}
-	>
-		<legend class="px-1 font-medium text-slate-900">Clasificación</legend>
+	<fieldset class="card grid gap-4 p-6 sm:grid-cols-2" {disabled}>
+		<legend class="px-1 font-medium text-stone-900">Clasificación</legend>
 		<SelectField
 			label="Categoría"
 			name="categoryId"
@@ -160,18 +154,18 @@
 			value={product?.concentration?.id ?? ''}
 		/>
 		<label class="flex flex-col gap-1 text-sm">
-			<span class="font-medium text-slate-700">Principios activos</span>
+			<span class="font-medium text-stone-700">Principios activos</span>
 			<select name="activeIngredientIds" multiple size="5" class={selectClass}>
 				{#each options.activeIngredients as item (item.id)}
 					<option value={item.id} selected={selectedIngredients.has(item.id)}>{item.name}</option>
 				{/each}
 			</select>
-			<span class="text-xs text-slate-500"
+			<span class="text-xs text-stone-500"
 				>Ctrl/Cmd + clic para elegir varios. Vacío si no aplica.</span
 			>
 		</label>
 		<label class="flex flex-col gap-1 text-sm">
-			<span class="font-medium text-slate-700">Etiquetas</span>
+			<span class="font-medium text-stone-700">Etiquetas</span>
 			<select name="tagIds" multiple size="5" class={selectClass}>
 				{#each options.tags as item (item.id)}
 					<option value={item.id} selected={selectedTags.has(item.id)}>{item.name}</option>
@@ -180,11 +174,8 @@
 		</label>
 	</fieldset>
 
-	<fieldset
-		class="grid gap-4 rounded-lg border border-slate-200 bg-white p-6 sm:grid-cols-2"
-		{disabled}
-	>
-		<legend class="px-1 font-medium text-slate-900">Información sanitaria</legend>
+	<fieldset class="card grid gap-4 p-6 sm:grid-cols-2" {disabled}>
+		<legend class="px-1 font-medium text-stone-900">Información sanitaria</legend>
 		<SelectField
 			label="Condición de venta"
 			name="saleCondition"
@@ -192,7 +183,7 @@
 			options={saleConditionOptions}
 			bind:value={saleCondition}
 		/>
-		<div class="text-sm text-slate-600 sm:self-end">
+		<div class="text-sm text-stone-600 sm:self-end">
 			{#if saleCondition !== 'OTC'}
 				No se vende en línea en esta versión; se muestra como «venta en farmacia».
 			{/if}
@@ -211,11 +202,8 @@
 		/>
 	</fieldset>
 
-	<fieldset
-		class="grid gap-4 rounded-lg border border-slate-200 bg-white p-6 sm:grid-cols-3"
-		{disabled}
-	>
-		<legend class="px-1 font-medium text-slate-900">Precio e inventario</legend>
+	<fieldset class="card grid gap-4 p-6 sm:grid-cols-3" {disabled}>
+		<legend class="px-1 font-medium text-stone-900">Precio e inventario</legend>
 		<TextField
 			label="Precio de venta (Q, IVA incluido)"
 			name="price"
@@ -237,12 +225,12 @@
 			min={0}
 			value={String(product?.lowStockThreshold ?? 0)}
 		/>
-		<label class="flex items-center gap-2 text-sm text-slate-700">
+		<label class="flex items-center gap-2 text-sm text-stone-700">
 			<input
 				type="checkbox"
 				name="isActive"
 				checked={product?.isActive ?? true}
-				class="rounded border-slate-300 text-teal-700 focus:ring-teal-600"
+				class="rounded border-stone-300 text-brand-700 focus:ring-brand-600"
 			/>
 			Producto activo
 		</label>

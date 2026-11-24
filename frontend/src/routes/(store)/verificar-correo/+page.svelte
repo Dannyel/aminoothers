@@ -15,7 +15,7 @@
 		<Alert variant="success" messages={form.success} />
 		<a
 			href={resolve(data.user ? 'cuenta/perfil' : 'login')}
-			class="mt-4 inline-block font-medium text-teal-700 hover:underline"
+			class="mt-4 inline-block font-medium text-brand-700 hover:underline"
 			>{data.user ? 'Ir a mi cuenta' : 'Iniciar sesión'}</a
 		>
 	{:else if !data.token}
@@ -34,7 +34,7 @@
 		>
 			<Alert variant="error" messages={form && 'messages' in form ? form.messages : undefined} />
 			<input type="hidden" name="token" value={data.token} />
-			<p class="text-sm text-slate-600">Presione el botón para confirmar su correo.</p>
+			<p class="text-sm text-stone-600">Presione el botón para confirmar su correo.</p>
 			<Button type="submit" loading={submitting}>Confirmar mi correo</Button>
 		</form>
 	{/if}

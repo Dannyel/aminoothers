@@ -21,10 +21,10 @@
 			Sin cuentas activas los clientes no pueden pagar por transferencia.
 		</EmptyState>
 	{:else}
-		<div class="overflow-x-auto rounded-lg border border-slate-200 bg-white">
-			<table class="min-w-full divide-y divide-slate-200 text-sm">
+		<div class="card overflow-x-auto">
+			<table class="min-w-full divide-y divide-stone-200 text-sm">
 				<thead
-					class="bg-slate-50 text-left text-xs font-medium tracking-wide text-slate-500 uppercase"
+					class="bg-stone-50 text-left text-xs font-medium tracking-wide text-stone-500 uppercase"
 				>
 					<tr>
 						<th class="px-4 py-3">Banco</th>
@@ -33,13 +33,13 @@
 						<th class="px-4 py-3">Estado</th>
 					</tr>
 				</thead>
-				<tbody class="divide-y divide-slate-100">
+				<tbody class="divide-y divide-stone-100">
 					{#each data.rows as a (a.id)}
 						<tr>
 							<td class="px-4 py-3">
 								<a
 									href={resolve(`admin/cuentas-bancarias/${a.id}`)}
-									class="text-teal-800 hover:underline">{a.bankName}</a
+									class="text-brand-800 hover:underline">{a.bankName}</a
 								>
 							</td>
 							<td class="px-4 py-3">{a.accountType} {a.accountNumber}</td>
@@ -56,7 +56,7 @@
 		</div>
 	{/if}
 	<section class="flex flex-col gap-3">
-		<h2 class="font-semibold text-slate-900">Nueva cuenta</h2>
+		<h2 class="font-semibold text-stone-900">Nueva cuenta</h2>
 		<Alert variant="success" messages={form && 'success' in form ? form.success : undefined} />
 		<Alert variant="error" messages={form && 'messages' in form ? form.messages : undefined} />
 		<BankAccountForm action="?/create" submitLabel="Agregar" />

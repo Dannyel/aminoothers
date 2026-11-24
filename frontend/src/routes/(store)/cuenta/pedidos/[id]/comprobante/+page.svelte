@@ -14,7 +14,7 @@
 <div class="mb-4 flex justify-between gap-2 print:hidden">
 	<a
 		href={resolve(`cuenta/pedidos/${data.invoice.orderId}`)}
-		class="rounded-md px-3 py-2 text-sm text-slate-700 hover:bg-slate-200">← Volver al pedido</a
+		class="rounded-lg px-3 py-2 text-sm text-stone-700 hover:bg-stone-200">← Volver al pedido</a
 	>
 	<Button type="button" variant="secondary" onclick={() => window.print()}>Imprimir</Button>
 </div>

@@ -24,7 +24,7 @@
 
 {#if data.orders.items.length === 0}
 	<EmptyState title="Aún no tiene pedidos">
-		<a href={resolve('productos')} class="text-teal-800 hover:underline">Ver el catálogo</a>
+		<a href={resolve('productos')} class="text-brand-800 hover:underline">Ver el catálogo</a>
 	</EmptyState>
 {:else}
 	<ul class="flex flex-col gap-3">
@@ -32,11 +32,11 @@
 			<li>
 				<a
 					href={resolve(`cuenta/pedidos/${order.id}`)}
-					class="flex flex-wrap items-center justify-between gap-3 rounded-lg border border-slate-200 bg-white p-4 hover:border-teal-600"
+					class="card flex flex-wrap items-center justify-between gap-3 p-4 hover:border-brand-600"
 				>
 					<span>
-						<span class="font-medium text-slate-900">{formatOrderNumber('PED', order.number)}</span>
-						<span class="block text-sm text-slate-500"
+						<span class="font-medium text-stone-900">{formatOrderNumber('PED', order.number)}</span>
+						<span class="block text-sm text-stone-500"
 							>{formatDateTime(order.placedAt)} · {order.itemCount} unidad(es)</span
 						>
 					</span>

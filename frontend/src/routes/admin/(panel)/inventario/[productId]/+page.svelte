@@ -24,12 +24,12 @@
 	{#snippet actions()}
 		<a
 			href={resolve(`admin/movimientos?productId=${product.id}`)}
-			class="rounded-md border border-slate-300 bg-white px-3 py-2 text-sm hover:bg-slate-50"
+			class="rounded-lg border border-stone-300 bg-white px-3 py-2 text-sm hover:bg-stone-50"
 			>Ver movimientos</a
 		>
 		<a
 			href={resolve('admin/inventario')}
-			class="rounded-md px-3 py-2 text-sm text-slate-700 hover:bg-slate-200">← Volver</a
+			class="rounded-lg px-3 py-2 text-sm text-stone-700 hover:bg-stone-200">← Volver</a
 		>
 	{/snippet}
 </PageHeading>
@@ -39,12 +39,12 @@
 	<Alert variant="error" messages={form && 'messages' in form ? form.messages : undefined} />
 
 	<div class="flex items-center justify-between">
-		<h2 class="font-medium text-slate-900">Lotes (orden de salida FEFO)</h2>
+		<h2 class="font-medium text-stone-900">Lotes (orden de salida FEFO)</h2>
 		<a
 			href={data.withStock
 				? resolve(`admin/inventario/${product.id}?todos`)
 				: resolve(`admin/inventario/${product.id}`)}
-			class="text-sm text-teal-700 hover:underline"
+			class="text-sm text-brand-700 hover:underline"
 			>{data.withStock ? 'Ver también lotes agotados' : 'Ver solo lotes con existencia'}</a
 		>
 	</div>
@@ -56,35 +56,35 @@
 	{:else}
 		<ul class="flex flex-col gap-3">
 			{#each data.lots.items as lot (lot.id)}
-				<li class="rounded-lg border border-slate-200 bg-white p-4">
+				<li class="card p-4">
 					<div class="flex flex-wrap items-start justify-between gap-3">
 						<div>
-							<p class="font-medium text-slate-900">
+							<p class="font-medium text-stone-900">
 								Lote {lot.lotNumber}
 								<LotStatusBadges {lot} />
 							</p>
-							<p class="text-sm text-slate-600">
+							<p class="text-sm text-stone-600">
 								Vence: {formatDate(lot.expirationDate)} · Costo promedio: Q{lot.avgUnitCost}
 								{#if lot.statusReason}· {lot.statusReason}{/if}
 							</p>
 						</div>
 						<dl class="grid grid-cols-3 gap-4 text-center text-sm">
 							<div>
-								<dt class="text-slate-500">Física</dt>
+								<dt class="text-stone-500">Física</dt>
 								<dd class="font-semibold">{lot.qtyOnHand}</dd>
 							</div>
 							<div>
-								<dt class="text-slate-500">Reservada</dt>
+								<dt class="text-stone-500">Reservada</dt>
 								<dd class="font-semibold">{lot.qtyReserved}</dd>
 							</div>
 							<div>
-								<dt class="text-slate-500">Disponible</dt>
-								<dd class="font-semibold text-teal-800">{lot.qtyAvailable}</dd>
+								<dt class="text-stone-500">Disponible</dt>
+								<dd class="font-semibold text-brand-800">{lot.qtyAvailable}</dd>
 							</div>
 						</dl>
 					</div>
 					{#if canAdjust || canQuarantine}
-						<div class="mt-3 border-t border-slate-100 pt-3">
+						<div class="mt-3 border-t border-stone-100 pt-3">
 							<LotActions {lot} {canAdjust} {canQuarantine} />
 						</div>
 					{/if}
@@ -94,8 +94,8 @@
 	{/if}
 
 	{#if canAdjust}
-		<details class="rounded-lg border border-slate-200 bg-white p-4" open={Boolean(values)}>
-			<summary class="cursor-pointer text-sm font-medium text-slate-800">
+		<details class="card p-4" open={Boolean(values)}>
+			<summary class="cursor-pointer text-sm font-medium text-stone-800">
 				Registrar existencia inicial o ingreso fuera de compra
 			</summary>
 			<form

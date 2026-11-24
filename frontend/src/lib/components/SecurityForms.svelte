@@ -25,9 +25,9 @@
 </script>
 
 <div class="flex flex-col gap-6">
-	<section class="rounded-lg border border-slate-200 bg-white p-6">
-		<h2 class="font-medium text-slate-900">Cambiar contraseña</h2>
-		<p class="mt-1 text-sm text-slate-600">Al cambiarla se cierran sus otras sesiones.</p>
+	<section class="card p-6">
+		<h2 class="font-medium text-stone-900">Cambiar contraseña</h2>
+		<p class="mt-1 text-sm text-stone-600">Al cambiarla se cierran sus otras sesiones.</p>
 		<form
 			method="post"
 			action="?/changePassword"
@@ -69,9 +69,9 @@
 		</form>
 	</section>
 
-	<section class="rounded-lg border border-slate-200 bg-white p-6">
-		<h2 class="font-medium text-slate-900">Doble factor</h2>
-		<p class="mt-1 text-sm text-slate-600">
+	<section class="card p-6">
+		<h2 class="font-medium text-stone-900">Doble factor</h2>
+		<p class="mt-1 text-sm text-stone-600">
 			Activo desde {formatDateTime(mfa.enabledAt)}. Le quedan
 			<strong>{mfa.recoveryCodesRemaining}</strong> código(s) de recuperación.
 		</p>
@@ -85,7 +85,7 @@
 				use:enhance
 			>
 				<Alert variant="error" messages={mfaForm?.messages} />
-				<p class="text-sm text-slate-600">
+				<p class="text-sm text-stone-600">
 					Para generar códigos nuevos (los anteriores dejarán de servir), ingrese el código actual
 					de su app autenticadora.
 				</p>
@@ -100,15 +100,15 @@
 				<div><Button type="submit" variant="secondary">Generar códigos nuevos</Button></div>
 			</form>
 		{/if}
-		<p class="mt-4 text-xs text-slate-500">
+		<p class="mt-4 text-xs text-stone-500">
 			Si cambia de teléfono y perdió los códigos, pida a la farmacia que restablezca su doble
 			factor.
 		</p>
 	</section>
 
-	<section class="rounded-lg border border-slate-200 bg-white p-6">
-		<h2 class="font-medium text-slate-900">Sesiones</h2>
-		<p class="mt-1 text-sm text-slate-600">
+	<section class="card p-6">
+		<h2 class="font-medium text-stone-900">Sesiones</h2>
+		<p class="mt-1 text-sm text-stone-600">
 			Si usó su cuenta en un equipo ajeno, cierre la sesión en todos los dispositivos.
 		</p>
 		<form method="post" action="?/logoutAll" class="mt-4">

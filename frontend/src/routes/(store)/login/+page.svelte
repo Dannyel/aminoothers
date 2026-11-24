@@ -12,7 +12,7 @@
 	{#snippet footer()}
 		¿No tiene cuenta? <a
 			href={resolve('registro')}
-			class="font-medium text-teal-700 hover:underline">Regístrese</a
+			class="font-medium text-brand-700 hover:underline">Regístrese</a
 		>
 	{/snippet}
 </AuthCard>

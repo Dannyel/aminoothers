@@ -24,7 +24,7 @@
 
 {#if form?.expired}
 	<Alert variant="error" messages={form.messages} />
-	<a href={loginHref} class="mt-4 inline-block font-medium text-teal-700 hover:underline"
+	<a href={loginHref} class="mt-4 inline-block font-medium text-brand-700 hover:underline"
 		>Volver a iniciar sesión</a
 	>
 {:else}
@@ -64,7 +64,7 @@
 		<Button type="submit" loading={submitting}>Verificar</Button>
 		<button
 			type="button"
-			class="text-sm text-teal-700 hover:underline"
+			class="text-sm text-brand-700 hover:underline"
 			onclick={() => (useRecovery = !useRecovery)}
 		>
 			{useRecovery

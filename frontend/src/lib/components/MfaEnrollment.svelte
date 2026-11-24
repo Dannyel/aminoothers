@@ -30,16 +30,16 @@
 	<div class="mt-4"><RecoveryCodes codes={form.recoveryCodes} /></div>
 	<a
 		href={form.next}
-		class="mt-6 inline-flex rounded-md bg-teal-700 px-4 py-2 text-sm font-medium text-white hover:bg-teal-800"
+		class="mt-6 inline-flex rounded-lg bg-brand-700 px-4 py-2 text-sm font-medium text-white hover:bg-brand-800"
 		>Ya los guardé, continuar</a
 	>
 {:else if form?.expired}
 	<Alert variant="error" messages={form.messages} />
-	<a href={loginHref} class="mt-4 inline-block font-medium text-teal-700 hover:underline"
+	<a href={loginHref} class="mt-4 inline-block font-medium text-brand-700 hover:underline"
 		>Volver a iniciar sesión</a
 	>
 {:else if enrollment}
-	<ol class="flex list-decimal flex-col gap-4 pl-5 text-sm text-slate-700">
+	<ol class="flex list-decimal flex-col gap-4 pl-5 text-sm text-stone-700">
 		<li>
 			Instale una app autenticadora en su teléfono (Google Authenticator, Microsoft Authenticator,
 			Authy…).
@@ -47,12 +47,12 @@
 		<li>
 			Escanee este código con la app:
 			<!-- SVG generado en el servidor por la librería qrcode a partir del secreto. -->
-			<div class="mt-3 w-48 rounded-md border border-slate-200 bg-white p-2">
+			<div class="mt-3 w-48 rounded-lg border border-stone-200 bg-white p-2">
 				<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 				{@html enrollment.qrSvg}
 			</div>
-			<p class="mt-2 text-xs text-slate-500">
-				¿No puede escanearlo? Ingrese esta clave: <span class="font-mono text-slate-800 select-all"
+			<p class="mt-2 text-xs text-stone-500">
+				¿No puede escanearlo? Ingrese esta clave: <span class="font-mono text-stone-800 select-all"
 					>{groupedSecret}</span
 				>
 			</p>

@@ -33,10 +33,10 @@
 
 <dialog
 	bind:this={dialog}
-	class="m-auto w-full max-w-md rounded-lg p-6 shadow-xl backdrop:bg-slate-900/40"
+	class="m-auto w-[calc(100%-2rem)] max-w-md rounded-3xl p-7 shadow-raised backdrop:bg-stone-950/50 backdrop:backdrop-blur-sm open:animate-fade-up"
 >
-	<p class="text-sm text-slate-700">{message}</p>
-	<div class="mt-6 flex justify-end gap-2">
+	<p class="text-stone-800">{message}</p>
+	<div class="mt-8 flex flex-wrap justify-end gap-2">
 		<Button type="button" variant="secondary" onclick={() => dialog.close()}>Cancelar</Button>
 		<Button type="submit" {variant} {formaction} {name} {value} onclick={() => dialog.close()}>
 			{confirmLabel}

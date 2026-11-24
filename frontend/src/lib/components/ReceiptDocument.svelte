@@ -12,19 +12,19 @@
 
 <!-- Comprobante interno: deliberadamente distinto de una factura FEL (D11). -->
 <article
-	class="flex flex-col gap-4 rounded-lg border border-slate-300 bg-white p-6 text-sm print:border-0 print:p-0"
+	class="flex flex-col gap-4 rounded-lg border border-stone-300 bg-white p-6 text-sm print:border-0 print:p-0"
 >
 	<p
-		class="rounded-md border-2 border-dashed border-amber-400 bg-amber-50 px-4 py-3 text-center font-semibold text-amber-900"
+		class="rounded-lg border-2 border-dashed border-amber-400 bg-amber-50 px-4 py-3 text-center font-semibold text-amber-900"
 	>
 		{invoice.legend}
 	</p>
 	<header class="flex flex-wrap justify-between gap-3">
 		<div>
-			<h1 class="text-lg font-semibold text-slate-900">
+			<h1 class="text-lg font-semibold text-stone-900">
 				Comprobante interno {formatOrderNumber('CI', invoice.number)}
 			</h1>
-			<p class="text-slate-600">{issuer}</p>
+			<p class="text-stone-600">{issuer}</p>
 		</div>
 		<div class="text-right">
 			<p>Pedido {formatOrderNumber('PED', invoice.orderNumber)}</p>
@@ -38,10 +38,10 @@
 	</header>
 	<section>
 		<p>Cliente: {invoice.customerName} · NIT {invoice.customerTaxId}</p>
-		{#if invoice.customerAddress}<p class="text-slate-600">{invoice.customerAddress}</p>{/if}
+		{#if invoice.customerAddress}<p class="text-stone-600">{invoice.customerAddress}</p>{/if}
 	</section>
 	<table class="min-w-full text-sm">
-		<thead class="border-b border-slate-200 text-left text-xs text-slate-500 uppercase">
+		<thead class="border-b border-stone-200 text-left text-xs text-stone-500 uppercase">
 			<tr>
 				<th class="py-2">Descripción</th>
 				<th class="py-2 text-right">Cant.</th>
@@ -50,7 +50,7 @@
 				<th class="py-2 text-right">Total</th>
 			</tr>
 		</thead>
-		<tbody class="divide-y divide-slate-100">
+		<tbody class="divide-y divide-stone-100">
 			{#each invoice.items as item, i (i)}
 				<tr>
 					<td class="py-2">{item.description}</td>
@@ -65,19 +65,19 @@
 		</tbody>
 	</table>
 	<dl class="ml-auto grid w-full max-w-xs grid-cols-2 gap-1">
-		<dt class="text-slate-600">Subtotal</dt>
+		<dt class="text-stone-600">Subtotal</dt>
 		<dd class="text-right">{formatMoney(invoice.subtotal)}</dd>
 		{#if Number(invoice.discountTotal) > 0}
-			<dt class="text-slate-600">Descuentos</dt>
+			<dt class="text-stone-600">Descuentos</dt>
 			<dd class="text-right">−{formatMoney(invoice.discountTotal)}</dd>
 		{/if}
 		<dt class="font-semibold">Total</dt>
 		<dd class="text-right font-semibold">{formatMoney(invoice.total)}</dd>
-		<dt class="text-xs text-slate-500">IVA incluido</dt>
-		<dd class="text-right text-xs text-slate-500">{formatMoney(invoice.taxTotal)}</dd>
+		<dt class="text-xs text-stone-500">IVA incluido</dt>
+		<dd class="text-right text-xs text-stone-500">{formatMoney(invoice.taxTotal)}</dd>
 	</dl>
 	{#if invoice.fel.status === 'CERTIFIED'}
-		<p class="text-slate-700">
+		<p class="text-stone-700">
 			Factura electrónica emitida: serie {invoice.fel.series}, número {invoice.fel.number},
 			autorización
 			{invoice.fel.authorizationUuid} ({invoice.fel.certifier}, {formatDateTime(

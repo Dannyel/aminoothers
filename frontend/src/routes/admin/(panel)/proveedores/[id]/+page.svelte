@@ -19,12 +19,12 @@
 	{#snippet actions()}
 		<a
 			href={resolve(`admin/compras?supplierId=${data.supplier.id}`)}
-			class="rounded-md border border-slate-300 bg-white px-3 py-2 text-sm hover:bg-slate-50"
+			class="rounded-lg border border-stone-300 bg-white px-3 py-2 text-sm hover:bg-stone-50"
 			>Ver órdenes</a
 		>
 		<a
 			href={resolve('admin/proveedores')}
-			class="rounded-md px-3 py-2 text-sm text-slate-700 hover:bg-slate-200">← Volver</a
+			class="rounded-lg px-3 py-2 text-sm text-stone-700 hover:bg-stone-200">← Volver</a
 		>
 	{/snippet}
 </PageHeading>

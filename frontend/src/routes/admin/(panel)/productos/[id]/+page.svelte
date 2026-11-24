@@ -28,7 +28,7 @@
 	{#snippet actions()}
 		<a
 			href={resolve('admin/productos')}
-			class="rounded-md px-3 py-2 text-sm text-slate-700 hover:bg-slate-200">← Volver</a
+			class="rounded-lg px-3 py-2 text-sm text-stone-700 hover:bg-stone-200">← Volver</a
 		>
 	{/snippet}
 </PageHeading>
@@ -60,8 +60,8 @@
 	</div>
 
 	<aside class="flex flex-col gap-4">
-		<section class="flex flex-col gap-3 rounded-lg border border-slate-200 bg-white p-5">
-			<h2 class="font-medium text-slate-900">Venta en línea</h2>
+		<section class="card flex flex-col gap-3 p-5">
+			<h2 class="font-medium text-stone-900">Venta en línea</h2>
 			<div class="flex flex-wrap gap-1">
 				<Badge tone={product.onlineSale.enabled ? 'success' : 'neutral'}>
 					{product.onlineSale.enabled ? 'Habilitada' : 'No habilitada'}
@@ -72,7 +72,7 @@
 				{#if !product.isActive}<Badge>Inactivo</Badge>{/if}
 			</div>
 			{#if product.onlineSale.enabled}
-				<p class="text-sm text-slate-600">
+				<p class="text-sm text-stone-600">
 					Aprobada por {product.onlineSale.approvedBy?.name ?? '—'} el
 					{formatDateTime(product.onlineSale.approvedAt)}.
 				</p>
@@ -95,17 +95,17 @@
 						</ConfirmButton>
 					</form>
 				{:else}
-					<p class="text-sm text-slate-600">
+					<p class="text-sm text-stone-600">
 						Solo los productos activos de venta libre pueden habilitarse en esta versión.
 					</p>
 				{/if}
 			{/if}
 		</section>
 
-		<section class="flex flex-col gap-3 rounded-lg border border-slate-200 bg-white p-5">
-			<h2 class="font-medium text-slate-900">Imágenes</h2>
+		<section class="card flex flex-col gap-3 p-5">
+			<h2 class="font-medium text-stone-900">Imágenes</h2>
 			{#if product.images.length === 0}
-				<p class="text-sm text-slate-500">Sin imágenes.</p>
+				<p class="text-sm text-stone-500">Sin imágenes.</p>
 			{:else}
 				<ul class="flex flex-col gap-3">
 					{#each product.images as image, index (image.id)}
@@ -113,7 +113,7 @@
 							<img
 								src={resolve(`media/${image.fileId}`)}
 								alt={image.altText ?? product.name}
-								class="size-20 rounded border border-slate-200 object-cover"
+								class="size-20 rounded border border-stone-200 object-cover"
 							/>
 							<div class="flex flex-col gap-1 text-sm">
 								{#if image.isPrimary}<Badge tone="info">Principal</Badge>{/if}
@@ -122,19 +122,19 @@
 										{#if !image.isPrimary}
 											<form method="post" action="?/setPrimary" use:enhance>
 												<input type="hidden" name="imageId" value={image.id} />
-												<button class="text-teal-700 hover:underline">Hacer principal</button>
+												<button class="text-brand-700 hover:underline">Hacer principal</button>
 											</form>
 										{/if}
 										{#if index > 0}
 											<form method="post" action="?/moveImage" use:enhance>
 												<input type="hidden" name="order" value={moved(index, -1)} />
-												<button class="text-slate-600 hover:underline" aria-label="Subir">↑</button>
+												<button class="text-stone-600 hover:underline" aria-label="Subir">↑</button>
 											</form>
 										{/if}
 										{#if index < product.images.length - 1}
 											<form method="post" action="?/moveImage" use:enhance>
 												<input type="hidden" name="order" value={moved(index, 1)} />
-												<button class="text-slate-600 hover:underline" aria-label="Bajar">↓</button>
+												<button class="text-stone-600 hover:underline" aria-label="Bajar">↓</button>
 											</form>
 										{/if}
 									</div>
@@ -159,7 +159,7 @@
 					method="post"
 					action="?/addImage"
 					enctype="multipart/form-data"
-					class="flex flex-col gap-2 border-t border-slate-100 pt-3"
+					class="flex flex-col gap-2 border-t border-stone-100 pt-3"
 					use:enhance
 				>
 					<input
@@ -173,10 +173,10 @@
 						name="altText"
 						maxlength={200}
 						placeholder="Descripción de la imagen (opcional)"
-						class="rounded-md border-slate-300 text-sm shadow-sm focus:border-teal-600 focus:ring-teal-600"
+						class="rounded-lg border-stone-300 text-sm shadow-sm focus:border-brand-600 focus:ring-brand-600"
 					/>
 					<div><Button type="submit" variant="secondary">Subir imagen</Button></div>
-					<p class="text-xs text-slate-500">JPEG, PNG o WebP. Hasta 8 imágenes.</p>
+					<p class="text-xs text-stone-500">JPEG, PNG o WebP. Hasta 8 imágenes.</p>
 				</form>
 			{/if}
 		</section>

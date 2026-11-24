@@ -9,7 +9,7 @@
 		$props();
 
 	const field =
-		'rounded-md border-slate-300 text-sm shadow-sm focus:border-teal-600 focus:ring-teal-600';
+		'rounded-lg border-stone-300 text-sm shadow-sm focus:border-brand-600 focus:ring-brand-600';
 	const adjustReasons = ['COUNT_CORRECTION', 'ENTRY_ERROR', 'FOUND', 'LOSS', 'OTHER'];
 	const outflowReasons = ['EXPIRED', 'DAMAGED', 'RECALL', 'RETURN_TO_SUPPLIER', 'OTHER'];
 	const statuses = Object.entries(LOT_STATUS_LABELS).filter(([value]) => value !== lot.status);
@@ -17,11 +17,11 @@
 </script>
 
 <details class="text-sm">
-	<summary class="cursor-pointer text-teal-700 hover:underline">Acciones</summary>
+	<summary class="cursor-pointer text-brand-700 hover:underline">Acciones</summary>
 	<div class="mt-3 grid gap-4 md:grid-cols-3">
 		{#if canAdjust}
 			<form method="post" action="?/adjust" class="flex flex-col gap-2" use:enhance>
-				<p class="font-medium text-slate-800">Ajuste</p>
+				<p class="font-medium text-stone-800">Ajuste</p>
 				<input type="hidden" name="lotId" value={lot.id} />
 				<select name="direction" class={field} aria-label="Tipo de ajuste">
 					<option value="IN">Entrada (+)</option>
@@ -62,7 +62,7 @@
 
 			{#if free > 0}
 				<form method="post" action="?/outflow" class="flex flex-col gap-2" use:enhance>
-					<p class="font-medium text-slate-800">Baja (máx. {free})</p>
+					<p class="font-medium text-stone-800">Baja (máx. {free})</p>
 					<input type="hidden" name="lotId" value={lot.id} />
 					<input
 						name="quantity"
@@ -93,7 +93,7 @@
 
 		{#if canQuarantine}
 			<form method="post" action="?/status" class="flex flex-col gap-2" use:enhance>
-				<p class="font-medium text-slate-800">Estado</p>
+				<p class="font-medium text-stone-800">Estado</p>
 				<input type="hidden" name="lotId" value={lot.id} />
 				<select name="status" class={field} aria-label="Nuevo estado">
 					{#each statuses as [value, label] (value)}<option {value}>{label}</option>{/each}

@@ -14,7 +14,7 @@
 <form
 	method="post"
 	{action}
-	class="grid gap-4 rounded-lg border border-slate-200 bg-white p-6 sm:grid-cols-2"
+	class="card grid gap-4 p-6 sm:grid-cols-2"
 	use:enhance={() =>
 		async ({ update }) =>
 			update({ reset: !account?.id })}
@@ -65,12 +65,12 @@
 		max={1000}
 		value={account?.sortOrder ?? 0}
 	/>
-	<label class="flex items-end gap-2 text-sm text-slate-700">
+	<label class="flex items-end gap-2 text-sm text-stone-700">
 		<input
 			type="checkbox"
 			name="isActive"
 			checked={account?.isActive ?? true}
-			class="rounded border-slate-300 text-teal-700 focus:ring-teal-600"
+			class="rounded border-stone-300 text-brand-700 focus:ring-brand-600"
 		/>
 		Visible para los clientes
 	</label>

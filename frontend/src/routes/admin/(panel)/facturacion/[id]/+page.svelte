@@ -21,14 +21,14 @@
 	const values = $derived(form && 'values' in form ? form.values : undefined);
 	const canManage = $derived(can(data.staff, 'billing.manage'));
 	const field =
-		'rounded-md border-slate-300 text-sm shadow-sm focus:border-teal-600 focus:ring-teal-600';
+		'rounded-lg border-stone-300 text-sm shadow-sm focus:border-brand-600 focus:ring-brand-600';
 </script>
 
 <PageHeading title="Comprobante {formatOrderNumber('CI', inv.number)}">
 	{#snippet actions()}
 		<a
 			href={resolve(`admin/pedidos/${inv.orderId}`)}
-			class="rounded-md px-3 py-2 text-sm text-slate-700 hover:bg-slate-200 print:hidden"
+			class="rounded-lg px-3 py-2 text-sm text-stone-700 hover:bg-stone-200 print:hidden"
 			>Ver pedido</a
 		>
 		<Button type="button" variant="secondary" onclick={() => window.print()}>Imprimir</Button>
@@ -45,13 +45,11 @@
 	<ReceiptDocument invoice={inv} issuer={data.info.legalName ?? data.info.tradeName} />
 
 	{#if canManage && inv.status === 'ISSUED'}
-		<section
-			class="flex flex-col gap-3 rounded-lg border border-slate-200 bg-white p-5 text-sm print:hidden"
-		>
-			<h2 class="font-semibold text-slate-900">
+		<section class="card flex flex-col gap-3 p-5 text-sm print:hidden">
+			<h2 class="font-semibold text-stone-900">
 				{inv.fel.status === 'CERTIFIED' ? 'Corregir datos de la FEL' : 'Registrar la FEL emitida'}
 			</h2>
-			<p class="text-slate-600">
+			<p class="text-stone-600">
 				Emita la factura electrónica en el portal de su certificador con los datos de este
 				comprobante y registre aquí lo que le devuelve.
 			</p>
@@ -93,10 +91,8 @@
 				<div class="flex items-end"><Button type="submit">Guardar datos FEL</Button></div>
 			</form>
 		</section>
-		<section
-			class="flex flex-col gap-2 rounded-lg border border-slate-200 bg-white p-5 text-sm print:hidden"
-		>
-			<h2 class="font-semibold text-slate-900">Anular comprobante</h2>
+		<section class="card flex flex-col gap-2 p-5 text-sm print:hidden">
+			<h2 class="font-semibold text-stone-900">Anular comprobante</h2>
 			{#if inv.fel.status === 'CERTIFIED'}
 				<p class="text-amber-800">
 					La FEL registrada debe anularse también en el portal del certificador.

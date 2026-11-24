@@ -16,7 +16,7 @@
 		<Alert variant="success" messages={form.success} />
 		<a
 			href={resolve(form.loginHref ?? 'login')}
-			class="mt-4 inline-block font-medium text-teal-700 hover:underline">Iniciar sesión</a
+			class="mt-4 inline-block font-medium text-brand-700 hover:underline">Iniciar sesión</a
 		>
 	{:else if !data.token}
 		<Alert

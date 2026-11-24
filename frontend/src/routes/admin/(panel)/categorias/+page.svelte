@@ -20,7 +20,7 @@
 		<form
 			method="post"
 			action="?/create"
-			class="grid gap-3 rounded-lg border border-slate-200 bg-white p-4 sm:grid-cols-[1fr_2fr_auto] sm:items-end"
+			class="card grid gap-3 p-4 sm:grid-cols-[1fr_2fr_auto] sm:items-end"
 			use:enhance={() =>
 				async ({ update }) =>
 					update({ reset: false })}
@@ -51,13 +51,13 @@
 				<li>
 					<a
 						href={resolve(`admin/categorias/${category.id}`)}
-						class="flex h-full flex-col gap-1 rounded-lg border border-slate-200 bg-white p-4 hover:border-teal-600"
+						class="card flex h-full flex-col gap-1 p-4 hover:border-brand-600"
 					>
-						<span class="font-medium text-slate-900">
+						<span class="font-medium text-stone-900">
 							{category.name}
 							{#if !category.isActive}<Badge>Inactiva</Badge>{/if}
 						</span>
-						<span class="text-sm text-slate-500">
+						<span class="text-sm text-stone-500">
 							{category.subcategories.length} subcategoría(s) · {category.productCount} producto(s)
 						</span>
 					</a>

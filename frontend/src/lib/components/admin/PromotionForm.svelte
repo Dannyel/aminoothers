@@ -41,13 +41,13 @@
 		else selected.delete(id);
 	};
 	const field =
-		'rounded-md border-slate-300 text-sm shadow-sm focus:border-teal-600 focus:ring-teal-600';
+		'rounded-lg border-stone-300 text-sm shadow-sm focus:border-brand-600 focus:ring-brand-600';
 </script>
 
 <form
 	method="post"
 	{action}
-	class="grid gap-4 rounded-lg border border-slate-200 bg-white p-6 sm:grid-cols-2"
+	class="card grid gap-4 p-6 sm:grid-cols-2"
 	use:enhance={() =>
 		async ({ update }) =>
 			update({ reset: false })}
@@ -60,7 +60,7 @@
 		value={promotion?.description ?? ''}
 	/>
 	<label class="flex flex-col gap-1 text-sm">
-		<span class="font-medium text-slate-700">Tipo</span>
+		<span class="font-medium text-stone-700">Tipo</span>
 		<select name="type" value={promotion?.type ?? 'PERCENTAGE'} class={field}>
 			<option value="PERCENTAGE">Porcentaje</option>
 			<option value="FIXED_AMOUNT">Monto fijo por unidad (Q)</option>
@@ -89,22 +89,22 @@
 		required
 		value={local(promotion?.endsAt)}
 	/>
-	<label class="flex items-center gap-2 text-sm text-slate-700 sm:col-span-2">
+	<label class="flex items-center gap-2 text-sm text-stone-700 sm:col-span-2">
 		<input
 			type="checkbox"
 			name="isActive"
 			checked={promotion?.isActive ?? true}
-			class="rounded border-slate-300 text-teal-700 focus:ring-teal-600"
+			class="rounded border-stone-300 text-brand-700 focus:ring-brand-600"
 		/>
 		Activa
 	</label>
 
 	<fieldset class="flex flex-col gap-2 sm:col-span-2">
-		<legend class="text-sm font-medium text-slate-700">
+		<legend class="text-sm font-medium text-stone-700">
 			Productos participantes ({selected.size})
 		</legend>
 		<input type="search" bind:value={filter} placeholder="Filtrar por nombre o SKU" class={field} />
-		<div class="max-h-72 overflow-y-auto rounded-md border border-slate-200 p-2">
+		<div class="max-h-72 overflow-y-auto rounded-lg border border-stone-200 p-2">
 			{#each products as p (p.id)}
 				<label class="flex items-center gap-2 py-1 text-sm {visible.includes(p) ? '' : 'hidden'}">
 					<input
@@ -113,13 +113,13 @@
 						value={p.id}
 						checked={selected.has(p.id)}
 						onchange={(e) => toggle(p.id, e.currentTarget.checked)}
-						class="rounded border-slate-300 text-teal-700 focus:ring-teal-600"
+						class="rounded border-stone-300 text-brand-700 focus:ring-brand-600"
 					/>
-					{p.name} <span class="text-slate-500">{p.sku}</span>
+					{p.name} <span class="text-stone-500">{p.sku}</span>
 				</label>
 			{/each}
 		</div>
-		<p class="text-xs text-slate-500">
+		<p class="text-xs text-stone-500">
 			Si un producto tiene varias promociones vigentes se aplica solo la de mayor descuento.
 		</p>
 	</fieldset>

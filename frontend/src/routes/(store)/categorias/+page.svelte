@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
-	import PageHeading from '#lib/components/PageHeading.svelte';
+	import Icon from '#lib/components/ui/Icon.svelte';
 	import EmptyState from '#lib/components/ui/EmptyState.svelte';
 	import type { PageProps } from './$types';
 
@@ -15,29 +15,56 @@
 	<title>Categorías · {data.info.tradeName}</title>
 </svelte:head>
 
-<div class="mx-auto max-w-6xl px-4 py-8">
-	<PageHeading title="Categorías" />
+<div class="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-14">
+	<header class="mb-12">
+		<p class="eyebrow">Explore</p>
+		<h1 class="mt-2 text-4xl sm:text-5xl">Categorías</h1>
+	</header>
 	{#if data.categories.length === 0}
-		<EmptyState title="Aún no hay categorías" />
+		<EmptyState title="Aún no hay categorías" icon="grid" />
 	{:else}
 		<ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
 			{#each data.categories as category (category.id)}
-				<li class="rounded-lg border border-slate-200 bg-white p-5">
+				<li class="flex flex-col rounded-3xl bg-sunken p-7">
 					<a
 						href="{catalogPath}?categoria={category.slug}"
-						class="text-lg font-medium text-teal-800 hover:underline">{category.name}</a
+						class="group flex items-start justify-between gap-4"
 					>
-					<p class="text-xs text-slate-500">{category.productCount} producto(s)</p>
+						<span>
+							<span
+								class="block font-display text-2xl font-medium tracking-tight text-stone-950 underline-offset-4 group-hover:underline"
+								>{category.name}</span
+							>
+							<span class="mt-1 block text-sm text-stone-500"
+								>{category.productCount}
+								{category.productCount === 1 ? 'producto' : 'productos'}</span
+							>
+						</span>
+						{#if category.imageFileId}
+							<img
+								src="/media/{category.imageFileId}"
+								alt=""
+								loading="lazy"
+								class="size-16 object-contain mix-blend-multiply"
+							/>
+						{:else}
+							<span
+								class="flex size-10 items-center justify-center rounded-full bg-white transition-transform duration-300 group-hover:translate-x-1"
+							>
+								<Icon name="arrowRight" class="size-4" />
+							</span>
+						{/if}
+					</a>
 					{#if category.description}
-						<p class="mt-2 text-sm text-slate-600">{category.description}</p>
+						<p class="mt-4 text-sm text-stone-600">{category.description}</p>
 					{/if}
 					{#if category.subcategories.length > 0}
-						<ul class="mt-3 flex flex-wrap gap-2 text-sm">
+						<ul class="mt-6 flex flex-wrap gap-2 text-sm">
 							{#each category.subcategories as sub (sub.id)}
 								<li>
 									<a
 										href="{catalogPath}?categoria={category.slug}&subcategoria={sub.slug}"
-										class="rounded-full bg-slate-100 px-3 py-1 text-slate-700 hover:bg-teal-50 hover:text-teal-800"
+										class="inline-flex min-h-9 items-center rounded-full bg-white px-4 text-stone-700 transition-colors duration-200 hover:bg-stone-900 hover:text-white"
 										>{sub.name}</a
 									>
 								</li>

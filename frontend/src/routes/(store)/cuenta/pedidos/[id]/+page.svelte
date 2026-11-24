@@ -34,7 +34,7 @@
 	);
 	let sending = $state(false);
 	const field =
-		'rounded-md border-slate-300 text-sm shadow-sm focus:border-teal-600 focus:ring-teal-600';
+		'rounded-lg border-stone-300 text-sm shadow-sm focus:border-brand-600 focus:ring-brand-600';
 </script>
 
 <!-- El enlace de rastreo apunta al sitio externo de la mensajería. -->
@@ -48,7 +48,7 @@
 	{#snippet actions()}
 		<a
 			href={resolve('cuenta/pedidos')}
-			class="rounded-md px-3 py-2 text-sm text-slate-700 hover:bg-slate-200">← Mis pedidos</a
+			class="rounded-lg px-3 py-2 text-sm text-stone-700 hover:bg-stone-200">← Mis pedidos</a
 		>
 	{/snippet}
 </PageHeading>
@@ -63,12 +63,10 @@
 		/>
 	{/if}
 
-	<section
-		class="flex flex-wrap items-center gap-3 rounded-lg border border-slate-200 bg-white p-5"
-	>
+	<section class="card flex flex-wrap items-center gap-3 p-5">
 		<Badge tone={ORDER_STATUS_TONES[order.status]}>{ORDER_STATUS_LABELS[order.status]}</Badge>
 		{#if pending && order.reservationExpiresAt}
-			<p class="text-sm text-slate-700">
+			<p class="text-sm text-stone-700">
 				{order.paymentMethod === 'BANK_TRANSFER'
 					? 'Reservamos sus productos hasta el'
 					: 'Confirmaremos su pedido antes del'}
@@ -77,13 +75,13 @@
 			</p>
 		{/if}
 		{#if order.status === 'PAYMENT_IN_REVIEW'}
-			<p class="text-sm text-slate-700">
+			<p class="text-sm text-stone-700">
 				Recibimos su comprobante. La farmacia verifica cada transferencia antes de preparar el
 				pedido.
 			</p>
 		{/if}
 		{#if order.cancelReason}
-			<p class="text-sm text-slate-700">Motivo de la cancelación: {order.cancelReason}</p>
+			<p class="text-sm text-stone-700">Motivo de la cancelación: {order.cancelReason}</p>
 		{/if}
 		{#if order.canCancel}
 			<form method="post" action="?/cancel" class="ml-auto" use:enhance>
@@ -98,15 +96,15 @@
 	</section>
 
 	{#if order.canSubmitTransfer}
-		<section class="flex flex-col gap-4 rounded-lg border border-teal-200 bg-white p-5">
-			<h2 class="font-semibold text-slate-900">Pague por transferencia</h2>
+		<section class="flex flex-col gap-4 rounded-lg border border-brand-200 bg-white p-5">
+			<h2 class="font-semibold text-stone-900">Pague por transferencia</h2>
 			{#if order.paymentRejectionReason}
 				<Alert
 					variant="warning"
 					messages="No pudimos verificar su comprobante anterior: {order.paymentRejectionReason}. Puede enviar uno nuevo."
 				/>
 			{/if}
-			<p class="text-sm text-slate-700">
+			<p class="text-sm text-stone-700">
 				Transfiera <strong>{formatMoney(order.total)}</strong> a una de estas cuentas y registre los datos
 				de la transferencia con su comprobante.
 			</p>
@@ -118,11 +116,11 @@
 			{:else}
 				<ul class="grid gap-3 sm:grid-cols-2">
 					{#each data.bankAccounts as account (account.id)}
-						<li class="rounded-md border border-slate-200 p-3 text-sm">
-							<p class="font-medium text-slate-900">{account.bankName}</p>
+						<li class="rounded-lg border border-stone-200 p-3 text-sm">
+							<p class="font-medium text-stone-900">{account.bankName}</p>
 							<p>Cuenta {account.accountType} {account.accountNumber}</p>
-							<p class="text-slate-600">A nombre de {account.accountHolder}</p>
-							{#if account.instructions}<p class="text-slate-500">{account.instructions}</p>{/if}
+							<p class="text-stone-600">A nombre de {account.accountHolder}</p>
+							{#if account.instructions}<p class="text-stone-500">{account.instructions}</p>{/if}
 						</li>
 					{/each}
 				</ul>
@@ -140,7 +138,7 @@
 					}}
 				>
 					<label class="flex flex-col gap-1 text-sm">
-						<span class="font-medium text-slate-700">Cuenta a la que transfirió</span>
+						<span class="font-medium text-stone-700">Cuenta a la que transfirió</span>
 						<select name="bankAccountId" required value={values?.bankAccountId ?? ''} class={field}>
 							<option value="" disabled>Elija una cuenta</option>
 							{#each data.bankAccounts as account (account.id)}
@@ -149,7 +147,7 @@
 						</select>
 					</label>
 					<label class="flex flex-col gap-1 text-sm">
-						<span class="font-medium text-slate-700">Número de referencia</span>
+						<span class="font-medium text-stone-700">Número de referencia</span>
 						<input
 							name="bankReference"
 							required
@@ -161,7 +159,7 @@
 						/>
 					</label>
 					<label class="flex flex-col gap-1 text-sm">
-						<span class="font-medium text-slate-700">Fecha de la transferencia</span>
+						<span class="font-medium text-stone-700">Fecha de la transferencia</span>
 						<input
 							type="date"
 							name="transferDate"
@@ -172,7 +170,7 @@
 						/>
 					</label>
 					<label class="flex flex-col gap-1 text-sm">
-						<span class="font-medium text-slate-700">Comprobante (imagen o PDF)</span>
+						<span class="font-medium text-stone-700">Comprobante (imagen o PDF)</span>
 						<input
 							type="file"
 							name="file"
@@ -191,8 +189,8 @@
 
 	{#if order.shipment}
 		{@const shipment = order.shipment}
-		<section class="rounded-lg border border-slate-200 bg-white p-5 text-sm">
-			<h2 class="mb-2 font-semibold text-slate-900">Seguimiento del envío</h2>
+		<section class="card p-5 text-sm">
+			<h2 class="mb-2 font-semibold text-stone-900">Seguimiento del envío</h2>
 			<p>
 				{shipment.courierName} · {SHIPMENT_STATUS_LABELS[shipment.status]}
 				{#if shipment.trackingNumber}· Guía {shipment.trackingNumber}{/if}
@@ -202,14 +200,14 @@
 					href={shipment.trackingUrl}
 					target="_blank"
 					rel="noopener noreferrer"
-					class="text-teal-800 hover:underline">Rastrear en el sitio de la mensajería ↗</a
+					class="text-brand-800 hover:underline">Rastrear en el sitio de la mensajería ↗</a
 				>
 			{/if}
-			<ol class="mt-3 flex flex-col gap-2 border-l border-slate-200 pl-4">
+			<ol class="mt-3 flex flex-col gap-2 border-l border-stone-200 pl-4">
 				{#each shipment.events as event, i (i)}
 					<li>
-						<p class="font-medium text-slate-800">{event.description}</p>
-						<p class="text-xs text-slate-500">
+						<p class="font-medium text-stone-800">{event.description}</p>
+						<p class="text-xs text-stone-500">
 							{formatDateTime(event.occurredAt)}{event.location ? ` · ${event.location}` : ''}
 						</p>
 					</li>
@@ -219,32 +217,32 @@
 	{/if}
 
 	<div class="grid gap-4 md:grid-cols-2">
-		<section class="rounded-lg border border-slate-200 bg-white p-5 text-sm">
-			<h2 class="mb-2 font-semibold text-slate-900">Entrega</h2>
+		<section class="card p-5 text-sm">
+			<h2 class="mb-2 font-semibold text-stone-900">Entrega</h2>
 			<p>{s.recipientName} · {s.phone}</p>
-			<p class="text-slate-600">
+			<p class="text-stone-600">
 				{s.addressLine1}{s.addressLine2 ? `, ${s.addressLine2}` : ''}{s.zone
 					? `, zona ${s.zone}`
 					: ''},
 				{s.municipality}, {s.department}
 			</p>
-			{#if s.reference}<p class="text-slate-500">Referencia: {s.reference}</p>{/if}
+			{#if s.reference}<p class="text-stone-500">Referencia: {s.reference}</p>{/if}
 			<p class="mt-2">Envío: {s.methodName}</p>
-			{#if order.customerNotes}<p class="text-slate-500">
+			{#if order.customerNotes}<p class="text-stone-500">
 					Indicaciones: {order.customerNotes}
 				</p>{/if}
 		</section>
-		<section class="rounded-lg border border-slate-200 bg-white p-5 text-sm">
-			<h2 class="mb-2 font-semibold text-slate-900">Pago y facturación</h2>
+		<section class="card p-5 text-sm">
+			<h2 class="mb-2 font-semibold text-stone-900">Pago y facturación</h2>
 			<p>{PAYMENT_METHOD_LABELS[order.paymentMethod]}</p>
 			{#if order.payment}
-				<p class="text-slate-600">
+				<p class="text-stone-600">
 					Estado del pago: {PAYMENT_STATUS_LABELS[order.payment.status]} · {formatMoney(
 						order.payment.amount
 					)}
 				</p>
 				{#if order.payment.bankReference}
-					<p class="text-slate-500">
+					<p class="text-stone-500">
 						{order.payment.bankName} · referencia {order.payment.bankReference}
 					</p>
 				{/if}
@@ -254,10 +252,10 @@
 				<p class="mt-2">
 					<a
 						href={resolve(`cuenta/pedidos/${order.id}/comprobante`)}
-						class="text-teal-800 hover:underline">Ver comprobante interno</a
+						class="text-brand-800 hover:underline">Ver comprobante interno</a
 					>
 					{#if order.receipt.felStatus === 'CERTIFIED'}
-						<span class="text-slate-500"
+						<span class="text-stone-500"
 							>· FEL serie {order.receipt.felSeries} n.º {order.receipt.felNumber}</span
 						>
 					{/if}
@@ -266,10 +264,10 @@
 		</section>
 	</div>
 
-	<section class="rounded-lg border border-slate-200 bg-white p-5">
-		<h2 class="mb-3 font-semibold text-slate-900">Productos</h2>
+	<section class="card p-5">
+		<h2 class="mb-3 font-semibold text-stone-900">Productos</h2>
 		<table class="min-w-full text-sm">
-			<thead class="text-left text-xs text-slate-500 uppercase">
+			<thead class="text-left text-xs text-stone-500 uppercase">
 				<tr>
 					<th class="py-2">Producto</th>
 					<th class="py-2 text-right">Precio</th>
@@ -277,12 +275,12 @@
 					<th class="py-2 text-right">Total</th>
 				</tr>
 			</thead>
-			<tbody class="divide-y divide-slate-100">
+			<tbody class="divide-y divide-stone-100">
 				{#each order.items as item (item.productId)}
 					<tr>
 						<td class="py-2">
 							{item.productName}
-							<span class="block text-xs text-slate-500">
+							<span class="block text-xs text-stone-500">
 								{[item.presentationLabel, item.concentrationLabel].filter(Boolean).join(' · ')}
 							</span>
 						</td>
@@ -308,19 +306,19 @@
 				total={order.total}
 			/>
 		</div>
-		<p class="mt-3 text-xs text-slate-500">Este resumen no constituye factura.</p>
+		<p class="mt-3 text-xs text-stone-500">Este resumen no constituye factura.</p>
 	</section>
 
-	<section class="rounded-lg border border-slate-200 bg-white p-5 text-sm">
-		<h2 class="mb-2 font-semibold text-slate-900">Historial</h2>
+	<section class="card p-5 text-sm">
+		<h2 class="mb-2 font-semibold text-stone-900">Historial</h2>
 		<ol class="flex flex-col gap-2">
 			{#each order.history as entry, i (i)}
 				<li class="flex flex-wrap justify-between gap-2">
 					<span>
 						{ORDER_STATUS_LABELS[entry.toStatus]}
-						{#if entry.note}<span class="text-slate-500">· {entry.note}</span>{/if}
+						{#if entry.note}<span class="text-stone-500">· {entry.note}</span>{/if}
 					</span>
-					<span class="text-slate-500">{formatDateTime(entry.createdAt)}</span>
+					<span class="text-stone-500">{formatDateTime(entry.createdAt)}</span>
 				</li>
 			{/each}
 		</ol>

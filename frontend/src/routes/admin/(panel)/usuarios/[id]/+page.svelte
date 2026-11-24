@@ -23,7 +23,7 @@
 	{#snippet actions()}
 		<a
 			href={resolve('admin/usuarios')}
-			class="rounded-md px-3 py-2 text-sm text-slate-700 hover:bg-slate-200">← Volver</a
+			class="rounded-lg px-3 py-2 text-sm text-stone-700 hover:bg-stone-200">← Volver</a
 		>
 	{/snippet}
 </PageHeading>
@@ -38,9 +38,7 @@
 	<Alert variant="success" messages={form && 'success' in form ? form.success : undefined} />
 	<Alert variant="error" messages={form && 'messages' in form ? form.messages : undefined} />
 
-	<section
-		class="flex flex-wrap gap-x-8 gap-y-2 rounded-lg border border-slate-200 bg-white p-6 text-sm"
-	>
+	<section class="card flex flex-wrap gap-x-8 gap-y-2 p-6 text-sm">
 		<p>
 			Estado:
 			<Badge tone={USER_STATUS_TONES[user.status]}>{USER_STATUS_LABELS[user.status]}</Badge>
@@ -59,8 +57,8 @@
 	</section>
 
 	{#if canManage}
-		<section class="rounded-lg border border-slate-200 bg-white p-6">
-			<h2 class="font-medium text-slate-900">Datos</h2>
+		<section class="card p-6">
+			<h2 class="font-medium text-stone-900">Datos</h2>
 			<form
 				method="post"
 				action="?/update"
@@ -88,10 +86,10 @@
 			</form>
 		</section>
 
-		<section class="rounded-lg border border-slate-200 bg-white p-6">
-			<h2 class="font-medium text-slate-900">Roles</h2>
+		<section class="card p-6">
+			<h2 class="font-medium text-stone-900">Roles</h2>
 			{#if isSelf}
-				<p class="mt-1 text-sm text-slate-600">No puede modificar sus propios roles.</p>
+				<p class="mt-1 text-sm text-stone-600">No puede modificar sus propios roles.</p>
 			{/if}
 			<form
 				method="post"
@@ -111,8 +109,8 @@
 		</section>
 
 		{#if !isSelf}
-			<section class="flex flex-col gap-4 rounded-lg border border-slate-200 bg-white p-6">
-				<h2 class="font-medium text-slate-900">Acceso</h2>
+			<section class="card flex flex-col gap-4 p-6">
+				<h2 class="font-medium text-stone-900">Acceso</h2>
 				<StatusActions status={user.status} name={fullName} />
 				<MfaResetButton name={fullName} />
 				{#if user.status === 'ACTIVE'}
@@ -123,7 +121,7 @@
 			</section>
 		{/if}
 	{:else}
-		<section class="rounded-lg border border-slate-200 bg-white p-6 text-sm text-slate-700">
+		<section class="card p-6 text-sm text-stone-700">
 			Roles: {user.roles.map((r) => r.name).join(', ') || '—'}
 		</section>
 	{/if}

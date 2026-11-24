@@ -42,7 +42,7 @@
 		required
 	/>
 	<div class="text-right text-sm">
-		<a href={resolve('recuperar-contrasena')} class="text-teal-700 hover:underline"
+		<a href={resolve('recuperar-contrasena')} class="text-brand-700 hover:underline"
 			>¿Olvidó su contraseña?</a
 		>
 	</div>

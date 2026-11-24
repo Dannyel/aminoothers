@@ -38,7 +38,7 @@
 	);
 	let submitting = $state(false);
 	const field =
-		'w-full rounded-md border-slate-300 text-sm shadow-sm focus:border-teal-600 focus:ring-teal-600';
+		'w-full rounded-lg border-stone-300 text-sm shadow-sm focus:border-brand-600 focus:ring-brand-600';
 </script>
 
 <form
@@ -53,7 +53,7 @@
 	}}
 >
 	<Alert variant="error" {messages} />
-	<div class="grid gap-4 rounded-lg border border-slate-200 bg-white p-6 sm:grid-cols-2">
+	<div class="card grid gap-4 p-6 sm:grid-cols-2">
 		<SelectField
 			label="Proveedor"
 			name="supplierId"
@@ -73,23 +73,23 @@
 		</div>
 	</div>
 
-	<div class="rounded-lg border border-slate-200 bg-white p-6">
-		<h2 class="mb-1 font-medium text-slate-900">Productos</h2>
-		<p class="mb-4 text-sm text-slate-600">
+	<div class="card p-6">
+		<h2 class="mb-1 font-medium text-stone-900">Productos</h2>
+		<p class="mb-4 text-sm text-stone-600">
 			Costo unitario sin IVA; el impuesto se calcula con la tasa de cada producto.
 		</p>
 		<div class="flex flex-col gap-3">
 			{#each rows as row, index (row.key)}
 				<div class="grid gap-2 sm:grid-cols-[1fr_8rem_9rem_auto] sm:items-end">
 					<label class="flex flex-col gap-1 text-sm">
-						<span class="font-medium text-slate-700 {index > 0 ? 'sm:sr-only' : ''}">Producto</span>
+						<span class="font-medium text-stone-700 {index > 0 ? 'sm:sr-only' : ''}">Producto</span>
 						<select name="productId" required bind:value={row.productId} class={field}>
 							<option value="">Seleccione…</option>
 							{#each products as p (p.id)}<option value={p.id}>{p.name} · {p.sku}</option>{/each}
 						</select>
 					</label>
 					<label class="flex flex-col gap-1 text-sm">
-						<span class="font-medium text-slate-700 {index > 0 ? 'sm:sr-only' : ''}">Cantidad</span>
+						<span class="font-medium text-stone-700 {index > 0 ? 'sm:sr-only' : ''}">Cantidad</span>
 						<input
 							name="quantity"
 							type="number"
@@ -100,7 +100,7 @@
 						/>
 					</label>
 					<label class="flex flex-col gap-1 text-sm">
-						<span class="font-medium text-slate-700 {index > 0 ? 'sm:sr-only' : ''}"
+						<span class="font-medium text-stone-700 {index > 0 ? 'sm:sr-only' : ''}"
 							>Costo unit. (Q)</span
 						>
 						<input
@@ -122,7 +122,7 @@
 		</div>
 		<button
 			type="button"
-			class="mt-3 text-sm text-teal-700 hover:underline"
+			class="mt-3 text-sm text-brand-700 hover:underline"
 			onclick={() => rows.push({ key: nextKey++, productId: '', quantity: '', unitCost: '' })}
 			>+ Agregar producto</button
 		>

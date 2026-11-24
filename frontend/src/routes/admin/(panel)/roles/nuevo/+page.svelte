@@ -15,7 +15,7 @@
 
 <form
 	method="post"
-	class="flex max-w-2xl flex-col gap-4 rounded-lg border border-slate-200 bg-white p-6"
+	class="card flex max-w-2xl flex-col gap-4 p-6"
 	use:enhance={() =>
 		async ({ update }) =>
 			update({ reset: false })}
@@ -50,7 +50,7 @@
 		<Button type="submit">Crear rol</Button>
 		<a
 			href={resolve('admin/roles')}
-			class="rounded-md px-4 py-2 text-sm text-slate-700 hover:bg-slate-100">Cancelar</a
+			class="rounded-lg px-4 py-2 text-sm text-stone-700 hover:bg-stone-100">Cancelar</a
 		>
 	</div>
 </form>

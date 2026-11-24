@@ -15,7 +15,7 @@
 
 	let { data }: PageProps = $props();
 	const field =
-		'rounded-md border-slate-300 text-sm shadow-sm focus:border-teal-600 focus:ring-teal-600';
+		'rounded-lg border-stone-300 text-sm shadow-sm focus:border-brand-600 focus:ring-brand-600';
 </script>
 
 <PageHeading
@@ -25,11 +25,11 @@
 
 <form method="get" class="mb-4 grid gap-3 sm:grid-cols-4 sm:items-end" role="search">
 	<label class="flex flex-col gap-1 text-sm">
-		<span class="font-medium text-slate-700">Destinatario o asunto</span>
+		<span class="font-medium text-stone-700">Destinatario o asunto</span>
 		<input type="search" name="search" value={data.filters.search} maxlength={100} class={field} />
 	</label>
 	<label class="flex flex-col gap-1 text-sm">
-		<span class="font-medium text-slate-700">Estado</span>
+		<span class="font-medium text-stone-700">Estado</span>
 		<select name="status" value={data.filters.status} class={field}>
 			<option value="">Todos</option>
 			{#each Object.entries(NOTIFICATION_STATUS_LABELS) as [value, label] (value)}
@@ -38,7 +38,7 @@
 		</select>
 	</label>
 	<label class="flex flex-col gap-1 text-sm">
-		<span class="font-medium text-slate-700">Tipo</span>
+		<span class="font-medium text-stone-700">Tipo</span>
 		<select name="type" value={data.filters.type} class={field}>
 			<option value="">Todos</option>
 			{#each Object.entries(NOTIFICATION_TYPE_LABELS) as [value, label] (value)}
@@ -48,7 +48,7 @@
 	</label>
 	<div>
 		<button
-			class="rounded-md border border-slate-300 bg-white px-4 py-2 text-sm font-medium hover:bg-slate-50"
+			class="rounded-lg border border-stone-300 bg-white px-4 py-2 text-sm font-medium hover:bg-stone-50"
 			>Filtrar</button
 		>
 	</div>
@@ -57,10 +57,10 @@
 {#if data.notifications.items.length === 0}
 	<EmptyState title="No hay correos que coincidan" />
 {:else}
-	<div class="overflow-x-auto rounded-lg border border-slate-200 bg-white">
-		<table class="min-w-full divide-y divide-slate-200 text-sm">
+	<div class="card overflow-x-auto">
+		<table class="min-w-full divide-y divide-stone-200 text-sm">
 			<thead
-				class="bg-slate-50 text-left text-xs font-medium tracking-wide text-slate-500 uppercase"
+				class="bg-stone-50 text-left text-xs font-medium tracking-wide text-stone-500 uppercase"
 			>
 				<tr>
 					<th class="px-4 py-3">Correo</th>
@@ -69,16 +69,16 @@
 					<th class="px-4 py-3">Fecha</th>
 				</tr>
 			</thead>
-			<tbody class="divide-y divide-slate-100">
+			<tbody class="divide-y divide-stone-100">
 				{#each data.notifications.items as n (n.id)}
 					<tr>
 						<td class="px-4 py-3">
 							<a
 								href={resolve(`admin/notificaciones/${n.id}`)}
-								class="font-medium text-teal-800 hover:underline"
+								class="font-medium text-brand-800 hover:underline"
 								>{n.subject ?? NOTIFICATION_TYPE_LABELS[n.type]}</a
 							>
-							<p class="text-xs text-slate-500">
+							<p class="text-xs text-stone-500">
 								{NOTIFICATION_TYPE_LABELS[n.type]}{n.orderNumber
 									? ` · ${formatOrderNumber('PED', n.orderNumber)}`
 									: ''}
@@ -90,10 +90,10 @@
 								>{NOTIFICATION_STATUS_LABELS[n.status]}</Badge
 							>
 							{#if n.status !== 'SENT' && n.attempts > 0}
-								<p class="text-xs text-slate-500">{n.attempts} intento(s)</p>
+								<p class="text-xs text-stone-500">{n.attempts} intento(s)</p>
 							{/if}
 						</td>
-						<td class="px-4 py-3 text-xs text-slate-600">
+						<td class="px-4 py-3 text-xs text-stone-600">
 							{formatDateTime(n.sentAt ?? n.createdAt)}
 						</td>
 					</tr>
