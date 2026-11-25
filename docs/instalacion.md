@@ -56,6 +56,24 @@ pnpm start:dev
 
 El seed crea los permisos, los roles de sistema y el primer superadministrador. En desarrollo (`MAIL_TRANSPORT=log`) los correos —verificación, recuperación, invitaciones— se escriben en la consola del backend; de ahí se copian los enlaces.
 
+### Crear otro administrador
+
+El seed solo crea el **primer** superadministrador. Para dar de alta otro usuario del personal desde la terminal, por ejemplo un segundo administrador o para recuperar el acceso si nadie puede entrar al panel:
+
+```bash
+cd backend
+pnpm build                                   # si aún no existe dist/
+pnpm admin:create --email ana@tienda.gt --nombre Ana --apellido López --rol ADMIN
+```
+
+- **Contraseña:** se pide en la terminal sin mostrarse. Tiene que tener entre 12 y 128 caracteres, con al menos una letra y un número. Nunca se pasa como argumento, para que no quede en el historial.
+- **Roles:** `SUPER_ADMIN`, `ADMIN` (por defecto), `PHARMACIST`, `WAREHOUSE`, `SALES` y `FINANCE`.
+- **Resultado:** el usuario queda con el correo verificado y el alta queda en la auditoría. En su primer ingreso al panel configura el doble factor.
+- **Correo existente:** el comando no modifica usuarios. Si el correo ya existe, se rechaza; para recuperar una cuenta se usa «Recuperar contraseña».
+- **Ayuda:** `pnpm admin:create --help`.
+
+El resto del personal se da de alta desde el panel (**Usuarios → Nuevo**), que envía una invitación por correo.
+
 - Tienda: `http://localhost:5173/login` · Panel: `http://localhost:5173/admin/login`
 
 - API: `http://localhost:3000/api/v1`

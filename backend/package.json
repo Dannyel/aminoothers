@@ -23,7 +23,8 @@
     "db:migrate": "prisma migrate dev",
     "db:migrate:deploy": "prisma migrate deploy",
     "db:migrate:status": "prisma migrate status",
-    "db:seed": "node dist/database/seed.js"
+    "db:seed": "node dist/database/seed.js",
+    "admin:create": "node dist/database/create-admin.js"
   },
   "dependencies": {
     "@nestjs/common": "^12.0.1",

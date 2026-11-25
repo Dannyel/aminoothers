@@ -84,6 +84,7 @@ Rotación de los registros de Docker, en `/etc/docker/daemon.json`:
 | Tarea | Cómo |
 |---|---|
 | Un usuario perdió su app autenticadora | Panel → Usuarios (o Clientes) → «Restablecer doble factor». Queda en la auditoría |
+| Crear un administrador desde el servidor (o recuperar el acceso si nadie puede entrar al panel) | `dc run --rm -it backend node dist/database/create-admin.js --email ana@tienda.gt --rol ADMIN`. Pide la contraseña sin mostrarla. Sin `-it`, se toma de `ADMIN_PASSWORD` (`-e ADMIN_PASSWORD=...`) |
 | Un usuario quedó bloqueado por intentos fallidos | Se desbloquea solo tras `AUTH_LOCK_MINUTES` (15 min) o con «Recuperar contraseña» |
 | Un correo no llegó | Panel → Correos enviados: ver el estado y el último error; reintentar si falló |
 | Revisar quién cambió un precio | Panel → Auditoría → módulo Productos; el detalle muestra el valor anterior y el nuevo |

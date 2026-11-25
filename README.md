@@ -16,6 +16,7 @@ cp .env.example .env          # ajustar DATABASE_URL y SHADOW_DATABASE_URL
 pnpm install
 pnpm db:migrate:deploy
 pnpm build && pnpm db:seed     # requiere INITIAL_ADMIN_EMAIL/PASSWORD la primera vez
+pnpm admin:create --email <correo>   # otro administrador (pide la contraseña)
 pnpm start:dev                # http://localhost:3000/api/docs
 
 # 2. Frontend (otra terminal)
